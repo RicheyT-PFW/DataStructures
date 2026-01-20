@@ -9,9 +9,7 @@ public class Lock {
     //Constructer for Lock.
     public Lock(int length) {
         this.combo = new int[length];
-        generate();
-
-    
+        generate();    
     }
 
     // Generate a new lock combination

@@ -2,72 +2,100 @@ package Project4;
 
 public class ThreeD_Location implements Cloneable {
 
-    // [x,y,z]
-    private double[] coords = new double[3];
+    private double x;
+    private double y;
+    private double z;
 
+    //Constructors
+    //Uses the default values for x,y and z
     public ThreeD_Location() {
         super();
-        coords = new double[3];
+    }
+
+    public ThreeD_Location(ThreeD_Location threeD_Location) {
+        this.x = threeD_Location.x;
+        this.y = threeD_Location.y;
+        this.z = threeD_Location.z;
+
     }
 
     public ThreeD_Location(double[] coords) {
+        if (coords == null) {
+            throw new NullPointerException(
+                    "'public ThreeD_Location(double[] coords)' threw a NullPointerException because coords is null");
+        }
+
         if (coords.length != 3) {
-            throw new IllegalArgumentException("double[] coords length must be three to represent a 3D point");
+            throw new IllegalArgumentException(
+                    "'public ThreeD_Location(double[] coords)' threw an IllegalArgumentException because the coords.length must be 3 to represent a 3D point");
         }
         super();
-        this.coords = coords.clone();
+        this.x = coords[0];
+        this.y = coords[1];
+        this.z = coords[2];
     }
 
-       public ThreeD_Location(double x, double y, double z) {
+    public ThreeD_Location(double x, double y, double z) {
         super();
         setCoords(x, y, z);
     }
 
+    // Getters
     public double getX() {
-        return coords[0];
+        return this.x;
     }
 
     public double getY() {
-        return coords[1];
+        return this.y;
     }
 
     public double getZ() {
-        return coords[2];
+        return this.z;
     }
 
     public double[] getCoords() {
-        return this.coords.clone();
+        return new double[]{this.x, this.y, this.z};
     }
 
+    // Setters
     public void setX(double x) {
-        coords[0] = x;
+        this.x = x;
     }
 
     public void setY(double y) {
-        coords[1] = y;
+        this.y = y;
     }
 
     public void setZ(double z) {
-        coords[2] = z;
+        this.z = z;
     }
 
+    public final void setCoords(double x, double y, double z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
+
+    //Shifting methods
     public void shiftX(double delta) {
-        coords[0] += delta;
+        this.x += delta;
     }
 
     public void shiftY(double delta) {
-        coords[1] += delta;
+        this.y += delta;
     }
 
     public void shiftZ(double delta) {
-        coords[2] += delta;
+        this.z += delta;
     }
 
-    public void setCoords(double x, double y, double z) {
-        coords[0] = x;
-        coords[1] = y;
-        coords[2] = z;
+    public void shift(double deltaX, double deltaY, double deltaZ) {
+        this.x += deltaX;
+        this.y += deltaY;
+        this.z += deltaZ;
     }
+
+    //Rotation methods
 
     /* After a θ rotation around the x-axis:
     x' = x
@@ -93,17 +121,14 @@ public class ThreeD_Location implements Cloneable {
         rotateAroundZRad(Math.toRadians(theta));
     }
 
-
-
     /* After a θ rotation around the x-axis:
     x' = x
     y' = y cos(θ) - z sin(θ)
     z' = y sin(θ) + z cos(θ)*/
     public void rotateAroundXRad(double radians) {
-
-        double xPrime = this.coords[0];
-        double yPrime = ((this.coords[1] * Math.cos(radians)) - (this.coords[2] * Math.sin(radians)));
-        double zPrime = ((this.coords[1] * Math.sin(radians)) + (this.coords[2] * Math.cos(radians)));
+        double xPrime = this.x;
+        double yPrime = ((this.y * Math.cos(radians)) - (this.z * Math.sin(radians)));
+        double zPrime = ((this.y * Math.sin(radians)) + (this.z * Math.cos(radians)));
         setCoords(xPrime, yPrime, zPrime);
     }
 
@@ -112,10 +137,9 @@ public class ThreeD_Location implements Cloneable {
     y' = y 
     z' = -x sin(θ) + z cos(θ)*/
     public void rotateAroundYRad(double radians) {
-
-        double xPrime = ((this.coords[0] * Math.cos(radians)) + (this.coords[2] * Math.sin(radians)));
-        double yPrime = this.coords[1];
-        double zPrime = (((-1 * this.coords[0]) * Math.sin(radians)) + (this.coords[2] * Math.cos(radians)));
+        double xPrime = ((this.x * Math.cos(radians)) + (this.z * Math.sin(radians)));
+        double yPrime = this.y;
+        double zPrime = (((-1 * this.x) * Math.sin(radians)) + (this.z * Math.cos(radians)));
         setCoords(xPrime, yPrime, zPrime);
     }
 
@@ -124,29 +148,22 @@ public class ThreeD_Location implements Cloneable {
     y' = x sin(θ) + y cos(θ)
     z' = z*/
     public void rotateAroundZRad(double radians) {
-
-        double xPrime = ((this.coords[0] * Math.cos(radians)) - (this.coords[1] * Math.sin(radians)));
-        double yPrime = ((this.coords[0] * Math.sin(radians)) + (this.coords[1] * Math.cos(radians)));
-        double zPrime = this.coords[2];
+        double xPrime = ((this.x * Math.cos(radians)) - (this.y * Math.sin(radians)));
+        double yPrime = ((this.x * Math.sin(radians)) + (this.y * Math.cos(radians)));
+        double zPrime = this.z;
         setCoords(xPrime, yPrime, zPrime);
     }
 
+    //Overrideable methods
     @Override
     public String toString() {
-        return java.util.Arrays.toString(this.coords);
+        return String.format("(%.2f, %.2f, %.2f)", x, y, z);
     }
 
     @Override
-    public ThreeD_Location clone() {
-        ThreeD_Location threeDClone = null;
-        try {
-            threeDClone = (ThreeD_Location) super.clone();
-            threeDClone.coords = this.coords.clone();
-        } catch (CloneNotSupportedException e) {
-            System.err.println(e.getMessage());
-            System.out.println(e.getMessage());
-            System.err.println(java.util.Arrays.toString(e.getStackTrace()));
-        }
+    public ThreeD_Location clone() throws CloneNotSupportedException {
+        ThreeD_Location threeDClone;
+        threeDClone = (ThreeD_Location) super.clone();
         return threeDClone;
     }
 

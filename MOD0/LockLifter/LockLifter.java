@@ -54,7 +54,7 @@ public class LockLifter {
                     } else {
                         System.out.println("Incorrect: " + result);
                     }
-                } catch (Exception e) {
+                } catch (IllegalArgumentException e) {
                     System.out.print("Invalid input. Must be a natural number and equal to hash length.\n");
                     System.err.print(e.getMessage());
                 }
