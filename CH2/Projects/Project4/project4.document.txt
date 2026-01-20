@@ -1,0 +1,39 @@
+Project 4 requirements:
+
+Specify, design, and implement a class that
+can be used to keep track of the position of
+a location in three-dimensional space. For
+example, consider this location (2.5,0,2.0)
+
+The location shown has three coordinates:
+
+ x = 2.5, y = 0, and z = 2.0. 
+ 
+Include methods to set a location to a specified point, 
+to shift a location a given amount along one of the 
+axes, and to retrieve the coordinates of a location.
+Also provide methods that will rotate the location 
+by a specified angle around a specified axis.
+
+To compute these rotations, you will need a bit of
+trigonometry. Suppose you have a location with coordinates 
+x, y, and z. After rotating this location by
+an angle , the location will have new coordinates,
+which we’ll call x', y', and z'. The equations for the
+new coordinates use the java.lang methods
+Math.sin and Math.cos, as shown here:
+
+After a θ rotation around the x-axis:
+    x' = x
+    y' = y cos(θ) - z sin(θ)
+    z' = y sin(θ) + z cos(θ)
+
+After a θ rotation around the y-axis:
+    x' = x cos(θ) + z sin(θ)
+    y' = y 
+    z' = -x sin(θ) + z cos(θ)
+
+After a θ rotation around the z-axis:
+    x' = x cos(θ) - y sin(θ)
+    y' = x sin(θ) + y cos(θ)
+    z' = z
