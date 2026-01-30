@@ -4,7 +4,7 @@
     This class handles the manipulation of the Lock and the overall game logic.
 */
 
-package MOD0.LockLifter;
+package locklifter;
 import java.util.Scanner;
 
 public class LockLifter {

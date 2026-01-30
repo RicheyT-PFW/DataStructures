@@ -1,0 +1,33 @@
+Instructions
+Object Serialization
+Serialization is the process of converting an object into a byte stream, 
+and deserialization is the process of converting a byte stream back into an object. 
+This is useful for saving an object to a file, sending it over a network, or storing 
+it in a database.
+
+Reference link: https://www.tutorialspoint.com/java/java_serialization.htm
+
+Write a Java program that does the following steps:
+
+    Creates five Position3D objects with random coordinates.
+
+    Serializes and saves the Position3D objects in a file named points.dat.
+
+    Deserializes the objects and prints their coordinate values to the console.
+
+The ArrayList class implements the java.io.Serializable interface, 
+which means instances of ArrayList can be serialized and deserialized.
+
+Add the following steps to your program:
+
+    Creates an ArrayList holding Position3D objects.
+
+    Adds 5 Position3D objects to the ArrayList.
+
+    Serializes the ArrayList to a file named list_points.dat.
+
+    Deserializes the ArrayList and prints each element’s coordinate values to the console.
+
+
+Remember that you must meet with the GTA to show them your submitted lab. After your meeting, you will receive a grade for the lab. 
+If needed, the meeting can be slightly after the due date, but please submit your code by the due date.

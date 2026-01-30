@@ -1,22 +1,18 @@
-package Project4;
+package project4;
 
 public class ThreeD_Location implements Cloneable {
-
     private double x;
     private double y;
     private double z;
 
     //Constructors
     //Uses the default values for x,y and z
-    public ThreeD_Location() {
-        super();
-    }
+    public ThreeD_Location() {}
 
     public ThreeD_Location(ThreeD_Location threeD_Location) {
         this.x = threeD_Location.x;
         this.y = threeD_Location.y;
         this.z = threeD_Location.z;
-
     }
 
     public ThreeD_Location(double[] coords) {
@@ -29,7 +25,6 @@ public class ThreeD_Location implements Cloneable {
             throw new IllegalArgumentException(
                     "'public ThreeD_Location(double[] coords)' threw an IllegalArgumentException because the coords.length must be 3 to represent a 3D point");
         }
-        super();
         this.x = coords[0];
         this.y = coords[1];
         this.z = coords[2];
@@ -166,5 +161,4 @@ public class ThreeD_Location implements Cloneable {
         threeDClone = (ThreeD_Location) super.clone();
         return threeDClone;
     }
-
 }

@@ -1,4 +1,4 @@
-package MOD0.LockLifter;
+package locklifter;
 
 import java.util.Random;
 
@@ -14,7 +14,7 @@ public class Lock {
 
     // Generate a new lock combination
     public final void generate() {
-        for (int i = 0; i < combo.length; ++i) {
+        for (int i = 0; i < combo.length; i++) {
             combo[i] = rng.nextInt(10);
         }
     }
@@ -26,7 +26,7 @@ public class Lock {
             throw new IllegalArgumentException("Guess length must be equal to " + combo.length);
         }
         int score = 0;
-        for (int i = 0; i < combo.length; ++i) {
+        for (int i = 0; i < combo.length; i++) {
             score += Math.abs(combo[i] - guess[i]);
         }
 
