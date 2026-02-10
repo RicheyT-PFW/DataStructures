@@ -1,20 +1,19 @@
-package mod1.position3D;
+package edu.pfw.richtj03.mod1;
 
 import java.util.Random;
 
 public class Position3D implements java.io.Serializable, Cloneable, Comparable<Position3D> {
+
     private double x;
     private double y;
     private double z;
-    private double distanceFromOrigin;
-    public static final Position3D origin = new Position3D(0,0,0);
+    public static final Position3D origin = new Position3D(0, 0, 0);
 
     public Position3D() {
         Random rand = new Random();
         this.x = rand.nextDouble(100);
         this.y = rand.nextDouble(100);
         this.z = rand.nextDouble(100);
-        this.distanceFromOrigin = this.distanceTo(origin);
     }
 
     public Position3D(double x, double y, double z) {
@@ -28,15 +27,34 @@ public class Position3D implements java.io.Serializable, Cloneable, Comparable<P
         return (Position3D) super.clone();
     }
 
-    public double getX() { return x; }
-    public void setX(double x) {this.x = x; }
-    public double getY() { return y; }
-    public void setY(double y) { this.y = y; }
-    public double getZ() { return z; }
-    public void setZ(double z) { this.z = z; }
+    public double getX() {
+        return x;
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+    }
+
+    public double getZ() {
+        return z;
+    }
+
+    public void setZ(double z) {
+        this.z = z;
+    }
 
     public final double distanceTo(Position3D other) {
-        if (other == null) return -1;
+        if (other == null) {
+            throw new NullPointerException("Other cannot be null in 'public final double distanceTo(Position3D other)'");
+        }
 
         double dx = this.x - other.x;
         double dy = this.y - other.y;
@@ -51,21 +69,33 @@ public class Position3D implements java.io.Serializable, Cloneable, Comparable<P
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
+        if (this == o) {
+            return true;
+        }
 
-        if (o == null || o.getClass() != this.getClass()) return false;
+        if (o == null || o.getClass() != this.getClass()) {
+            return false;
+        }
 
         Position3D pos = (Position3D) o;
+        Object ob = new Object();
 
         return this.x == pos.x && this.y == pos.y && this.z == pos.z;
     }
 
-    
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(x, y, z);
+    }
 
     @Override
     public int compareTo(Position3D o) {
-        if (this == o) return 0;
-        if (o == null) return -1;
-        return  Double.compare(this.distanceFromOrigin, o.distanceFromOrigin);
+        if (this == o) {
+            return 0;
+        }
+        if (o == null) {
+            throw new NullPointerException("O cannot be null in 'public int compareTo(Position3D o)'");
+        }
+        return Double.compare(this.distanceTo(origin), o.distanceTo(origin));
     }
 }

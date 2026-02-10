@@ -1,4 +1,4 @@
-package locklifter;
+package edu.pfw.richtj03.mod0;
 
 import java.util.Random;
 
@@ -21,10 +21,11 @@ public class Lock {
     
     //Returns the difference of the lock and user guess. Throws a error if input is null
     //or is not the same length as the lock.
-    public int getDifference(int[] guess) throws IllegalArgumentException{
+    public int getDifference(int[] guess) {
         if (guess == null || guess.length != combo.length) {
-            throw new IllegalArgumentException("Guess length must be equal to " + combo.length);
+            throw new IllegalArgumentException("\nGuess length must be equal to " + combo.length + "\n");
         }
+        
         int score = 0;
         for (int i = 0; i < combo.length; i++) {
             score += Math.abs(combo[i] - guess[i]);

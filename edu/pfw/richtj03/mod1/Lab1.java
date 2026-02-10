@@ -3,7 +3,7 @@
  * Lab 1 - Object Serialization
  */
 
-package lab1;
+package edu.pfw.richtj03.mod1;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

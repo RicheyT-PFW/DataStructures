@@ -1,10 +1,10 @@
 /*
-    Terrell Richey - rich03@pfw.edu
+    Terrell Richey - richtj03@pfw.edu
     LOCK LIFTER
     This class handles the manipulation of the Lock and the overall game logic.
 */
 
-package locklifter;
+package edu.pfw.richtj03.mod0;
 import java.util.Scanner;
 
 public class LockLifter {
@@ -12,7 +12,6 @@ public class LockLifter {
     //Convert the user input to an int array
     public static int[] convertGuess(String guess) {
         int[] conversion = new int[guess.length()];
-
         for (int i = 0; i < guess.length() ; i++){
             conversion[i] = guess.charAt(i) - '0';
         }
@@ -54,8 +53,8 @@ public class LockLifter {
                     } else {
                         System.out.println("Incorrect: " + result);
                     }
-                } catch (IllegalArgumentException e) {
-                    System.out.print("Invalid input. Must be a natural number and equal to hash length.\n");
+                } catch (Exception e) {
+                    System.out.println("\nInvalid input. Must be a natural number and equal to hash length.\n");
                     System.err.print(e.getMessage());
                 }
             }
