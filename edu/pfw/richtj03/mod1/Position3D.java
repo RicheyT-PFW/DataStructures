@@ -78,7 +78,6 @@ public class Position3D implements java.io.Serializable, Cloneable, Comparable<P
         }
 
         Position3D pos = (Position3D) o;
-        Object ob = new Object();
 
         return this.x == pos.x && this.y == pos.y && this.z == pos.z;
     }
