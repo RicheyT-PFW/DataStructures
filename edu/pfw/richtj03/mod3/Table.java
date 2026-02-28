@@ -185,8 +185,6 @@ private int hash(K key) {
 	} catch (FileNotFoundException e) {
 	    
 	}
-
-	System.out.println(tbl);
 	System.out.println();
 	System.out.println(tbl.getCollisionCount());
     }
