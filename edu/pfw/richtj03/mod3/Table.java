@@ -1,5 +1,8 @@
 package edu.pfw.richtj03.mod3;
 import java.lang.reflect.Array;
+import java.io.FileNotFoundException;
+import java.io.File;
+import java.util.Scanner;
 
 public class Table<K, V> {
     private int manyItems;
@@ -21,17 +24,13 @@ public class Table<K, V> {
         keys = (K[]) Array.newInstance(Object.class, capacity);
         data = (V[]) Array.newInstance(Object.class, capacity);
         hasBeenUsed = new boolean[capacity];
-    }
-
-   private void setCollisionCount() {
-	
    }
 
    private void setLoadFactor() {
-	return 
+	this.loadFactor =  ((float) manyItems / (float) data.length); 
    }
 
-   public int collisionCount() {
+   public int getCollisionCount() {
 	return collisionCount;
    }
 
@@ -74,6 +73,7 @@ public class Table<K, V> {
      * @return Previous value for this key, or null if the key is new
      */
     public V put(K key, V element) {
+	boolean collision = false;
         int index = findIndex(key);
         V answer;
         if (index != -1) { // The key is already in the table.
@@ -82,16 +82,24 @@ public class Table<K, V> {
             return answer;
         } else if (manyItems < data.length) { // The key is not yet in this Table.
             index = hash(key);
-            while (keys[index] != null)
+            while (keys[index] != null) {
                 index = nextIndex(index);
+		collision=true;
+	    }
+	    if(collision==true) {
+		collisionCount++;
+	    }
             keys[index] = key;
             data[index] = element;
             hasBeenUsed[index] = true;
             manyItems++;
+	    setLoadFactor();
             return null;
-        } else // The table is full.
-            throw new IllegalStateException("Table is full.");
+        } else
+	   // The table is full.
+           throw new IllegalStateException("Table is full.");
     }
+
     public V get(K key) {
         int index = findIndex(key);
         if (index == -1)
@@ -133,12 +141,53 @@ public class Table<K, V> {
         keys[i] = null;
         data[i] = null;
 	manyItems--;
+	setLoadFactor();
         return t;
      }
 
+/*
+Lab 4: Table stats
+Modify the Table class to keep two statistics:
+Load factor α (0.0 to 1.0) – Indicates how full the table is
+Collision Count – Total # of collisions that happen throughout the table’s existence
 
+Write a main method that creates a table of 1024 capacity and adds 750 elements using the provided sample file SSN_NAME.csv. In this scenario, the SSN is the table key. Test that the table has an expected load factor and report the total collisions. Repeat the same collision test with a new simpler hash function and discuss any differences in the collision count:
+
+private int hash(K key) {
+    return (key.hashCode() & Integer.MAX_VALUE) % data.length;
+}
+*/
     public static void main(String[] args) {
 	final int capacity = 1024;
+	String buffer;
+	String key;
+	String value;
         Table<String, String> tbl = new Table<>(capacity);
+	
+	File ssnFile = new File("./edu/pfw/richtj03/assets/SSN_NAME.csv");
+	try(Scanner scanner = new Scanner(ssnFile)) {
+	    while(scanner.hasNextLine()) {
+		buffer = scanner.nextLine();
+		for(int i = 0; i < buffer.length();i++ ) {
+		 if(buffer.charAt(i) == ',') {
+		 key = buffer.substring(0,i);
+		 value = buffer.substring(i+1);
+		 tbl.put(key,value);
+		 System.out.println(value + " has been added with ssn " + key + "n");
+                 System.out.println(tbl.getLoadFactor());
+                 System.out.println();
+		 break;
+
+		 }
+		}
+	    }
+
+	} catch (FileNotFoundException e) {
+	    
+	}
+
+	System.out.println(tbl);
+	System.out.println();
+	System.out.println(tbl.getCollisionCount());
     }
 }
