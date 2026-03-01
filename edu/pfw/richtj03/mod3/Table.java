@@ -37,7 +37,10 @@ public class Table<K, V> {
 	return loadFactor;
     }
     public int findIndex(K key) {
-        int count = 0;
+        if(key==null) {
+	   return -1;
+	}
+	int count = 0;
         int i = hash(key);
         while (count < data.length && hasBeenUsed[i]) {
             if (key.equals(keys[i]))
