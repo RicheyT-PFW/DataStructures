@@ -43,7 +43,7 @@ public class Table<K, V> {
 	int count = 0;
         int i = hash(key);
         while (count < data.length && hasBeenUsed[i]) {
-            if (key.equals(keys[i]))
+            if (keys[i] != null && key.equals(keys[i]))
                 return i;
             count++;
             i = nextIndex(i);
