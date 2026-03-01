@@ -12,7 +12,6 @@ public class Table<K, V> {
     private float loadFactor;
     private int collisionCount;
 
-
     public Table(int capacity) {
         if (capacity <= 0)
             throw new IllegalArgumentException("Capacity is negative");
@@ -53,7 +52,7 @@ public class Table<K, V> {
      * A hash function used in Java's HashMap
      * Expects the table size to be a power of 2
      */
-    private int hash(K key) {
+  /*  private int hash(K key) {
         int h = 0;
         //Performs a bitwise exclusive OR of the two halves of the 32-bit int from hashCode().
         if (key != null) {
@@ -61,7 +60,7 @@ public class Table<K, V> {
             h = (h >>> 16) % data.length; // Shift 32-bit to the right by 16 bits and compress to the size of the table
         }
         return h;
-    }
+    }*/
     private int nextIndex(int i) {
         if (i + 1 == data.length)
             return 0;
@@ -80,16 +79,16 @@ public class Table<K, V> {
             answer = data[index];
             data[index] = element;
             return answer;
-        } else if (manyItems < data.length) { // The key is not yet in this Table.
+        } else if (manyItems < data.length) { // The Table is not full.
             index = hash(key);
             while (keys[index] != null) {
                 index = nextIndex(index);
 		collision=true;
 	    }
-	    if(collision==true) {
-		collisionCount++;
-	    }
-            keys[index] = key;
+
+	    if(collision==true) 
+	    	collisionCount++;
+	    keys[index] = key;
             data[index] = element;
             hasBeenUsed[index] = true;
             manyItems++;
@@ -157,8 +156,14 @@ private int hash(K key) {
     return (key.hashCode() & Integer.MAX_VALUE) % data.length;
 }
 */
-    public static void main(String[] args) {
+
+private int hash(K key) {
+    return (key.hashCode() & Integer.MAX_VALUE) % data.length;
+}
+
+public static void main(String[] args) {
 	final int capacity = 1024;
+	//We will use buffer to read the file line by line.
 	String buffer;
 	String key;
 	String value;
@@ -173,19 +178,18 @@ private int hash(K key) {
 		 key = buffer.substring(0,i);
 		 value = buffer.substring(i+1);
 		 tbl.put(key,value);
-		 System.out.println(value + " has been added with ssn " + key + "n");
-                 System.out.println(tbl.getLoadFactor());
+		 System.out.println(value + " has been added with ssn " + key + "\n");
+                 System.out.println("Current Load Factor: " + tbl.getLoadFactor());
                  System.out.println();
 		 break;
-
 		 }
 		}
 	    }
 
 	} catch (FileNotFoundException e) {
-	    
+	    System.err.println(e.getMessage());
 	}
-	System.out.println();
+	System.out.println("Table Item Count: " + tbl.size());
 	System.out.println(tbl.getCollisionCount());
     }
 }
