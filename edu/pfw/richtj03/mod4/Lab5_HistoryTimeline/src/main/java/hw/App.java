@@ -1,0 +1,32 @@
+package hw;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+
+/**
+ * Name: Thomas Bolinger
+ * Username: bolitj01
+ */
+public class App extends Application {
+
+    private static Scene scene;
+
+    @Override
+    public void start(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("main.fxml"));
+        Parent p = fxmlLoader.load();
+        scene = new Scene(p);
+        stage.setScene(scene);
+        stage.setTitle("Lab5 - History Timeline");
+        stage.show();
+    }
+
+    public static void main(String[] args) {
+        launch();
+    }
+
+}
