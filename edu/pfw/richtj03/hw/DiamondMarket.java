@@ -75,7 +75,7 @@ public class DiamondMarket {
         //9. Print salesD.
         System.out.println("salesD (intersection):\n" + salesD);
 
-        //salesD has no diamonds in the bag because both neither bag contains the same item 
+        //salesD has no diamonds in the bag because neither bag contains the same item 
     }
 
 }
