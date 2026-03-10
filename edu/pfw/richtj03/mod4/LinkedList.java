@@ -1,13 +1,11 @@
 package edu.pfw.richtj03.mod4;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /******************************************************************************
  * A LinkedList<E> provides a generic singly linked list implementation.
  * It manages various connected Node objects.
  ******************************************************************************/
-
-import java.util.Iterator;
-import java.util.ListIterator;
-import java.util.NoSuchElementException;
 
 /** Part C
  *  To make this class a doubly linked list we would need to add a previous node.
@@ -25,7 +23,9 @@ import java.util.NoSuchElementException;
  *  the target is greater than the middle index, traverse from the tail. If less than the
  *  middle index, traverse from the head. If the target is the middle, do either.
  */
-public class LinkedList<E> implements Cloneable, Iterable<E> {
+public class LinkedList<E> implements Cloneable, Iterable<E>, java.io.Serializable {
+    @java.io.Serial
+    private static final long serialVersionUID = 1L;
     private int size;
     private Node<E> head;
     private Node<E> tail;
@@ -36,7 +36,7 @@ public class LinkedList<E> implements Cloneable, Iterable<E> {
         // variable data.
         // 2. For the final node of a list, the link is null.
         // Otherwise, the link is a reference to the next list node.
-        private E data;
+        private final E data;
         private Node<E> next;
 
 
@@ -52,10 +52,6 @@ public class LinkedList<E> implements Cloneable, Iterable<E> {
         }
     }
 
-    @Override
-    public Iterator<E> iterator() {
-        return new LinkedListIterator<E>(head);
-    }
 
     class LinkedListIterator<T> implements Iterator<T> {
         Node<T> current;
@@ -92,8 +88,14 @@ public class LinkedList<E> implements Cloneable, Iterable<E> {
     /**
      * Creates an empty LinkedList
      **/
-    public LinkedList() {
+    public LinkedList() {}
+    
+    
+    @Override
+    public Iterator<E> iterator() {
+        return new LinkedListIterator<>(head);
     }
+
     public int size() {
         return size;
     }
@@ -103,10 +105,10 @@ public class LinkedList<E> implements Cloneable, Iterable<E> {
     public void add(E element) {
 // For empty list, set head and tail to the new node
         if (head == null) {
-            head = new Node<E>(element, null);
+            head = new Node<>(element, null);
             tail = head;
         } else {
-            tail.next = new Node<E>(element, null);
+            tail.next = new Node<>(element, null);
             tail = tail.next;
         }
         size++;
@@ -128,6 +130,7 @@ public class LinkedList<E> implements Cloneable, Iterable<E> {
         }
         size++;
     }
+
     /**
      * Removes the element at the specified index
      */
@@ -148,7 +151,7 @@ public class LinkedList<E> implements Cloneable, Iterable<E> {
     /**
      * Removes the first occurrence of the element
      */
-    public boolean removeNode(E element) {
+    private boolean removeNode(E element) {
         if (element == null) {
             throw new NullPointerException("element is null");
         }
@@ -173,9 +176,9 @@ public class LinkedList<E> implements Cloneable, Iterable<E> {
      * Go to a specific index and return the element.
      * head is at index 0 and tail is at index size - 1.
      */
-    public Node<E> nodeAt(int index) {
+    private Node<E> nodeAt(int index) {
         validateIndex(index);
-//Conveniently return tail if index is the last element
+    //Conveniently return tail if index is the last element
         if (index == size - 1) {
             return tail;
         }
@@ -233,8 +236,9 @@ public class LinkedList<E> implements Cloneable, Iterable<E> {
     /**
      * Get a deep copy of the list
      */
-    public LinkedList<E> copy() {
-        LinkedList<E> copy = new LinkedList<E>();
+    @Override
+    public LinkedList<E> clone() throws CloneNotSupportedException {
+        LinkedList<E> copy = new LinkedList<>();
         Node<E> current = head;
         while (current != null) {
             copy.add(current.data);

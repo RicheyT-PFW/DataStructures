@@ -18,10 +18,5 @@ private final int DEFAULT_CAPACITY = 10;
     public GenericSequence_ (T[] data) {
         this.data = data.clone();
         for(int i = 0; i < this.data.length && this.data[i] != null; i++, this.itemCount++);
-     /* int i = 0;
-        while(i < this.data.length && this.data[i] != null) {
-            this.itemCount++;
-            i++;
-        }*/
     }    
 }
