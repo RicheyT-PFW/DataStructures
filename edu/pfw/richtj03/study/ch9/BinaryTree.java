@@ -2,13 +2,15 @@ package edu.pfw.richtj03.study.ch9;
 
 public class BinaryTree<E> {
 
-	private Node<E> {
+	private class  Node<E> {
 	   E data;
-	   Node left;
-	   Node right;
+	   Node<E> left;
+	   Node<E> right;
 
-	   private Node(E data) {
-	   	this.data = data;
+	   private Node(Node<E> left, Node<E> right, E data) {
+	   	this.left = left;
+		this.right = right;
+		this.data = data;
 	   }
 	}
 }
