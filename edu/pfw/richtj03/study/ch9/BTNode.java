@@ -36,7 +36,7 @@ public class BTNode<E> {
         if (this.right == null) {
             return this.data;
         } else {
-            return this.getRightMostData();
+            return right.getRightMostData();
         }
     }
 

@@ -47,20 +47,24 @@ public class Animal {
 		System.out.print("I give up. What are you? ");
 		String correctAnimal = stdin.nextLine();
 		String guessedAnimal = current.getData();
-		System.out.print("\nPlease type a yes/no question that will distinguish a " + correctAnimal + "from a " + guessedAnimal + ".");
+		System.out.print("\nPlease type a yes/no question that will distinguish a " + correctAnimal + " from a " + guessedAnimal + ".");
 		System.out.print("\nYour question: ");
 		String newQuestion = stdin.nextLine();
+		while(newQuestion.isBlank() || newQuestion.isEmpty()) {
+			System.out.println("Question cannot be blank or empty. Try again");
+			System.out.print("\nYour question: ");
+			newQuestion = stdin.nextLine();
+		}
 		String newQuery = "As a " + correctAnimal + ", " + newQuestion + " Please answer ";
 		boolean queryResult = query(newQuery);
 
+		current.setData(newQuestion);
 		if(queryResult) {
-			current.data = newQuestion;
-			current.left = new BTNode<>(null, null, correctAnimal);
-			current.right = new BTNode<>(null, null, guessedAnimal);
+			current.setLeft(new BTNode<>(null, null, correctAnimal));
+			current.setRight(new BTNode<>(null, null, guessedAnimal));
 		} else {
-			current.data = newQuestion;
-			current.left = new BTNode<>(null, null, guessedAnimal);
-			current.right = new BTNode<>(null, null, correctAnimal);
+			current.setLeft(new BTNode<>(null, null, guessedAnimal));
+			current.setRight(new BTNode<>(null, null, correctAnimal));
 		}
     }
 
