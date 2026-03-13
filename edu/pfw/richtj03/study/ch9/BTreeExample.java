@@ -95,6 +95,22 @@ public class BTreeExample<E> {
                 System.out.println("--");
             }
         }
+	
+
+	public int getChildCount() {
+	    int childCount = 0;
+	    
+	    if(left != null) {
+	        childCount++;
+		childCount += left.getChildCount();
+	    }
+
+	    if(right != null) {
+		childCount++;
+		childCount += right.getChildCount();
+	    }
+	    return childCount;    
+	}
 
     }
     BTNode<E> root;
@@ -107,11 +123,22 @@ public class BTreeExample<E> {
         root = new BTNode<>(null, null, data);
     }
 
+    public int  getTotalChildren(){ 
+	return root.getChildCount();
+    }
+
+
     public static void main(String[] args) {
         BTreeExample<String> strTree = new BTreeExample<>("1");
         strTree.root.left = strTree.new BTNode<>(null, null, "2");
         strTree.root.right = strTree.new BTNode<>(null, null, "3");
+	System.out.println(strTree.getTotalChildren());
+	System.out.println();
+        BTreeExample<String>.BTNode<String> node = strTree.new BTNode<>(null, null, "4");
+	strTree.root.left.left = node;
+	node = strTree.new BTNode<>(null, null, "5");
+	strTree.root.left.right = node;
+	System.out.println(strTree.getTotalChildren());
 
-        strTree.root.print(0);
     }
 }
