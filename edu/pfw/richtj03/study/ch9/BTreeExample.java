@@ -1,5 +1,5 @@
 package edu.pfw.richtj03.study.ch9;
-
+import java.util.Scanner;
 public class BTreeExample<E> {
 
     public class BTNode<E> {
@@ -107,6 +107,8 @@ public class BTreeExample<E> {
 
 	    if(right != null) {
 		childCount++;
+		
+
 		childCount += right.getChildCount();
 	    }
 	    return childCount;    
@@ -129,7 +131,8 @@ public class BTreeExample<E> {
 
 
     public static void main(String[] args) {
-        BTreeExample<String> strTree = new BTreeExample<>("1");
+        
+	BTreeExample<String> strTree = new BTreeExample<>("1");
         strTree.root.left = strTree.new BTNode<>(null, null, "2");
         strTree.root.right = strTree.new BTNode<>(null, null, "3");
 	System.out.println(strTree.getTotalChildren());
@@ -139,6 +142,7 @@ public class BTreeExample<E> {
 	node = strTree.new BTNode<>(null, null, "5");
 	strTree.root.left.right = node;
 	System.out.println(strTree.getTotalChildren());
+	
 
     }
 }
