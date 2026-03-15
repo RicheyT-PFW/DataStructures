@@ -97,25 +97,75 @@ public class BTreeExample<E> {
         }
 	
 
-	public int getChildCount() {
-	    int childCount = 0;
+	public int getNodeCount() {
+	    int count = 0;
 	    
 	    if(left != null) {
-	        childCount++;
-		childCount += left.getChildCount();
+	        count++;
+		count += left.getNodeCount();
 	    }
 
 	    if(right != null) {
-		childCount++;
-		
-
-		childCount += right.getChildCount();
+		count++;
+		count += right.getNodeCount();
 	    }
-	    return childCount;    
+	    return count;    
+	}
+
+	public void insertLeft(E data) {
+		if(data == null) {
+		    throw new IllegalArgumentException("Data cannot be null");
+		}
+		BTNode<E> node = new BTNode<E>(null, null, data);
+		this.left = node;
+	}
+
+	public void insertRight(E data) {
+		if(data == null) {
+		    throw new IllegalArgumentException("Data cannot be null");
+		}
+		BTNode<E> node = new BTNode<E>(null, null, data);
+		this.right = node;
+	}
+
+	public int getChildCount() {
+	    int count = 0;
+
+	    if(left != null) {
+		count++;
+	    }
+
+	    if(right != null) {
+		count++;
+	    }
+
+	    return count;
+	}
+
+	@SuppressWarnings("unchecked")	    
+	public void populate() {
+	String queryLeft = "Do you want to insert into left of " + this.data;
+	if(query(queryLeft)) {
+	    System.out.print("Enter data: ");
+	    E data = (E) stdin.nextLine();
+	    this.insertLeft(data);
+	    this.left.populate();
+	}
+
+	String queryRight = "Do you want to insert into right of " + this.data;
+	if(query(queryRight)) {
+	    System.out.print("Enter data: ");
+	    E data = (E) stdin.nextLine();
+	    this.insertRight(data);
+	    this.right.populate();
 	}
 
     }
+
+    }
+
     BTNode<E> root;
+    private static final Scanner stdin = new Scanner(System.in);
 
 
     public BTreeExample(E data) {
@@ -130,19 +180,28 @@ public class BTreeExample<E> {
     }
 
 
+    public void populate() {
+	this.root.populate();
+    }
+
+    // The query Method. This method prints a prompt (using System.out.print)
+    // and reads the user’s yes or no answer (using stdin.nextLine). If the user
+    // responds yes, then the method returns true; otherwise, the method returns false.
+    public static boolean query(String prompt) {
+        String answer;
+        System.out.print(prompt + " [Y or N]: ");
+        answer = stdin.nextLine().toUpperCase();
+        while (!answer.startsWith("Y") && !answer.startsWith("N")) {
+            System.out.print("Invalid response. Please type Y or N: ");
+            answer = stdin.nextLine().toUpperCase();
+        }
+        return answer.startsWith("Y");
+    }
+
     public static void main(String[] args) {
         
-	BTreeExample<String> strTree = new BTreeExample<>("1");
-        strTree.root.left = strTree.new BTNode<>(null, null, "2");
-        strTree.root.right = strTree.new BTNode<>(null, null, "3");
-	System.out.println(strTree.getTotalChildren());
-	System.out.println();
-        BTreeExample<String>.BTNode<String> node = strTree.new BTNode<>(null, null, "4");
-	strTree.root.left.left = node;
-	node = strTree.new BTNode<>(null, null, "5");
-	strTree.root.left.right = node;
-	System.out.println(strTree.getTotalChildren());
-	
-
+	BTreeExample<String> strTree = new BTreeExample<>("0");
+	strTree.populate();
+	strTree.root.print(0);
     }
 }
