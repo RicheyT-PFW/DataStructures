@@ -1,5 +1,7 @@
 package edu.pfw.richtj03.study.ch9;
+
 import java.util.Scanner;
+
 public class BTreeExample<E> {
 
     public class BTNode<E> {
@@ -56,7 +58,6 @@ public class BTreeExample<E> {
         }
 
         public void postorderPrint() {
-            System.out.println(this.data);
             if (this.right != null) {
                 this.right.postorderPrint();
             }
@@ -64,6 +65,7 @@ public class BTreeExample<E> {
             if (this.left != null) {
                 this.left.postorderPrint();
             }
+            System.out.println(this.data);
         }
 
         public void print(int depth) {
@@ -77,8 +79,8 @@ public class BTreeExample<E> {
 
             // Print the left subtree (or a dash if there is a right child and no left child).
             if (left != null) {
-                left.print(depth + 1); 
-            }else if (right != null) {
+                left.print(depth + 1);
+            } else if (right != null) {
                 for (i = 1; i <= depth + 1; i++) {
                     System.out.print(" ");
                 }
@@ -87,86 +89,82 @@ public class BTreeExample<E> {
 
             // Print the right subtree (or a dash if there is a left child and no left child).
             if (right != null) {
-                right.print(depth + 1); 
-            }else if (left != null) {
+                right.print(depth + 1);
+            } else if (left != null) {
                 for (i = 1; i <= depth + 1; i++) {
                     System.out.print(" ");
                 }
                 System.out.println("--");
             }
         }
-	
 
-	public int getNodeCount() {
-	    int count = 0;
-	    
-	    if(left != null) {
-	        count++;
-		count += left.getNodeCount();
-	    }
+        public int getNodeCount() {
+            int count = 0;
 
-	    if(right != null) {
-		count++;
-		count += right.getNodeCount();
-	    }
-	    return count;    
-	}
+            if (left != null) {
+                count++;
+                count += left.getNodeCount();
+            }
 
-	public void insertLeft(E data) {
-		if(data == null) {
-		    throw new IllegalArgumentException("Data cannot be null");
-		}
-		BTNode<E> node = new BTNode<E>(null, null, data);
-		this.left = node;
-	}
+            if (right != null) {
+                count++;
+                count += right.getNodeCount();
+            }
+            return count;
+        }
 
-	public void insertRight(E data) {
-		if(data == null) {
-		    throw new IllegalArgumentException("Data cannot be null");
-		}
-		BTNode<E> node = new BTNode<E>(null, null, data);
-		this.right = node;
-	}
+        public void insertLeft(E data) {
+            if (data == null) {
+                throw new IllegalArgumentException("Data cannot be null");
+            }
+            BTNode<E> node = new BTNode<>(null, null, data);
+            this.left = node;
+        }
 
-	public int getChildCount() {
-	    int count = 0;
+        public void insertRight(E data) {
+            if (data == null) {
+                throw new IllegalArgumentException("Data cannot be null");
+            }
+            BTNode<E> node = new BTNode<>(null, null, data);
+            this.right = node;
+        }
 
-	    if(left != null) {
-		count++;
-	    }
+        public int getChildCount() {
+            int count = 0;
 
-	    if(right != null) {
-		count++;
-	    }
+            if (left != null) {
+                count++;
+            }
 
-	    return count;
-	}
+            if (right != null) {
+                count++;
+            }
 
-	@SuppressWarnings("unchecked")	    
-	public void populate() {
-	String queryLeft = "Do you want to insert into left of " + this.data;
-	if(query(queryLeft)) {
-	    System.out.print("Enter data: ");
-	    E data = (E) stdin.nextLine();
-	    this.insertLeft(data);
-	    this.left.populate();
-	}
+            return count;
+        }
 
-	String queryRight = "Do you want to insert into right of " + this.data;
-	if(query(queryRight)) {
-	    System.out.print("Enter data: ");
-	    E data = (E) stdin.nextLine();
-	    this.insertRight(data);
-	    this.right.populate();
-	}
+        @SuppressWarnings("unchecked")
+        public void populate() {
+            String queryLeft = "Do you want to insert into left of " + this.data;
+            if (query(queryLeft)) {
+                System.out.print("Enter data: ");
+                E newData = (E) stdin.nextLine();
+                this.insertLeft(newData);
+                this.left.populate();
+            }
 
-    }
-
+            String queryRight = "Do you want to insert into right of " + this.data;
+            if (query(queryRight)) {
+                System.out.print("Enter data: ");
+                E newData = (E) stdin.nextLine();
+                this.insertRight(newData);
+                this.right.populate();
+            }
+        }
     }
 
     BTNode<E> root;
     private static final Scanner stdin = new Scanner(System.in);
-
 
     public BTreeExample(E data) {
         if (data == null) {
@@ -175,13 +173,12 @@ public class BTreeExample<E> {
         root = new BTNode<>(null, null, data);
     }
 
-    public int  getTotalChildren(){ 
-	return root.getChildCount();
+    public int getTotalChildren() {
+        return root.getNodeCount();
     }
 
-
     public void populate() {
-	this.root.populate();
+        this.root.populate();
     }
 
     // The query Method. This method prints a prompt (using System.out.print)
@@ -199,9 +196,8 @@ public class BTreeExample<E> {
     }
 
     public static void main(String[] args) {
-        
-	BTreeExample<String> strTree = new BTreeExample<>("0");
-	strTree.populate();
-	strTree.root.print(0);
+        BTreeExample<String> strTree = new BTreeExample<>("0");
+        strTree.populate();
+        strTree.root.inorderPrint();
     }
 }
