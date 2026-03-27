@@ -78,12 +78,13 @@ public class Controller {
             writinglbl += undoStack.pop();
             undoStacklbl.text = undoStack.toString();
             currentToken = "";
-        } else if(event.getCode() == KeyCode.Z && !isControlDown()) {
+        } else if(event.getCode() == KeyCode.Y && isControlDown()) {
             writinglbl += event.getText();
             currentToken += event.getText();
             tokenlbl.text = currentToken;
-            
         }
+
+
         
     }
 
