@@ -5,19 +5,18 @@ import java.util.NoSuchElementException;
 /******************************************************************************
  * A LinkedList<E> provides a generic singly linked list implementation.
  * It manages various connected Node objects.
- ******************************************************************************/
-
-/** Part C
+ 
+ * Part C
  *  To make this class a doubly linked list we would need to add a previous node.
  *  We would need to account for this change in any method that adds or removes
  *  nodes from the list.
- *
+ 
  *  For adding, not only would we need to adjust the previous node to have the next new node,
  *  we would also need to adjust the next new node to reference the previous node.
- *
+ 
  *  For removing, we would need to adjust the 2 nodes forward to previous and the previous
  *  2 two nodes forward.
- *
+ 
  *  One way that the NodeAt method could be modified to have improved performance with a
  *  doubly linked list is to check the middle index. After checking the middle index, if
  *  the target is greater than the middle index, traverse from the tail. If less than the
@@ -30,7 +29,7 @@ public class LinkedList<E> implements Cloneable, Iterable<E>, java.io.Serializab
     private Node<E> head;
     private Node<E> tail;
 
-    class Node<E> {
+    private class Node<E> {
         // Invariant of the Node class:
         // 1. Each node has one reference to an E Object, stored in the instance
         // variable data.
@@ -46,9 +45,9 @@ public class LinkedList<E> implements Cloneable, Iterable<E>, java.io.Serializab
          * @param initialData the initial data of this new node
          * @param initialLink a reference to the node after this new node - may be null
          **/
-        public Node(E initialData, Node<E> initialLink) {
+        public Node(E initialData, Node<E> nextLink) {
             data = initialData;
-            next = initialLink;
+            next = nextLink;
         }
     }
 
@@ -136,13 +135,27 @@ public class LinkedList<E> implements Cloneable, Iterable<E>, java.io.Serializab
      */
     public boolean removeAt(int index) {
         validateIndex(index);
+
+	//If the list is empty
         if (size == 0) {
-            throw new NullPointerException("List is empty");
+            throw new IllegalStateException("Cannot remove from an empty list");
         }
-        if (index == 0) { //Remove head
+
+	//If list has more than one element
+	//and we are removing the first index
+        if (index == 0 && size != 1) { 
             head = head.next;
-        } else {
+	//If the list has one element and we are removing
+	//the first index
+        } else if (index == 0 && size == 1) {
+		head = null;
+		tail = null;
+	} else {
+	    // Grab the node before the specified index
             Node<E> previous = nodeAt(index - 1);
+
+	    // Skip over the specified index by setting
+	    // the nextLink to the node after the specified index
             previous.next = previous.next.next;
         }
         size--;
@@ -236,8 +249,7 @@ public class LinkedList<E> implements Cloneable, Iterable<E>, java.io.Serializab
     /**
      * Get a deep copy of the list
      */
-    @Override
-    public LinkedList<E> clone() throws CloneNotSupportedException {
+    public LinkedList<E> copy() {
         LinkedList<E> copy = new LinkedList<>();
         Node<E> current = head;
         while (current != null) {
