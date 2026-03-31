@@ -120,7 +120,7 @@ public class BTNode<E> {
         if (this.right == null) {
             return this.left;
         } else {
-            this.right = this.removeRightMost();
+            right = right.removeRightMost();
             return this;
         }
     }

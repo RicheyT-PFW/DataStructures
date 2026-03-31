@@ -1,6 +1,7 @@
 package edu.pfw.richtj03.mod4;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.io.*;
 
 /******************************************************************************
  * A LinkedList<E> provides a generic singly linked list implementation.
@@ -22,8 +23,8 @@ import java.util.NoSuchElementException;
  *  the target is greater than the middle index, traverse from the tail. If less than the
  *  middle index, traverse from the head. If the target is the middle, do either.
  */
-public class LinkedList<E> implements Cloneable, Iterable<E>, java.io.Serializable {
-    @java.io.Serial
+public class LinkedList<E> implements Cloneable, Iterable<E>, Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
     private int size;
     private Node<E> head;
@@ -88,6 +89,18 @@ public class LinkedList<E> implements Cloneable, Iterable<E>, java.io.Serializab
      * Creates an empty LinkedList
      **/
     public LinkedList() {}
+
+    @Override
+    public LinkedList<E> clone() {
+
+        LinkedList <E> clone = null;
+        try{
+            clone = (LinkedList<E>) super.clone();
+        } catch(Exception e) {
+            System.out.print(e);
+        }
+        return clone;
+    } 
     
     
     @Override
