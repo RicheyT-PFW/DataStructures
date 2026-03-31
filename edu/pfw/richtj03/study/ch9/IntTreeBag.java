@@ -273,24 +273,7 @@ public class IntTreeBag implemnts Cloneable {
             return count;
         }
 
-        @SuppressWarnings("unchecked")
-        public void populate() {
-            String queryLeft = "Do you want to insert into left of " + this.data;
-            if (query(queryLeft)) {
-                System.out.print("Enter data: ");
-                int newData = (int) stdin.nextLine();
-                this.insertLeft(newData);
-                this.left.populate();
-            }
-
-            String queryRight = "Do you want to insert into right of " + this.data;
-            if (query(queryRight)) {
-                System.out.print("Enter data: ");
-                int newData = (int) stdin.nextLine();
-                this.insertRight(newData);
-                this.right.populate();
-            }
-        }
+ 
     }
 	
 
