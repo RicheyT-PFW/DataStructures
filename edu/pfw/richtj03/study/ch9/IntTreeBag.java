@@ -9,7 +9,7 @@ package edu.pfw.richtj03.study.ch9;
 
 /* An IntTreeBag is a collection of int numbers.
  * Beyond Integer.Max_VALUE elements, countOccurrences and size are wrong*/
-public class IntTreeBag implemnts Cloneable {
+public class IntTreeBag implements Cloneable {
 
 	private IntBTNode root;
 	
@@ -82,6 +82,7 @@ public class IntTreeBag implemnts Cloneable {
 	   */
 	   public IntTreeBag clone() throws CloneNotSupportedException {
 		//TODO
+		return null;
 	   }
 	   
 	  /* public int countOccurrences(int target)
@@ -94,6 +95,7 @@ public class IntTreeBag implemnts Cloneable {
 	   */
 	   public int countOccurrences(int target) {
 	       //TODO
+	       return -1;
 	   }
 
       /* public int size()
@@ -103,6 +105,7 @@ public class IntTreeBag implemnts Cloneable {
        */
 	   public int size() {
 	      //TODO
+	      return -1;
 	   }
 
 	 /* public boolean remove(int target)
@@ -115,7 +118,8 @@ public class IntTreeBag implemnts Cloneable {
 	  *  unchanged and the method returns false.
 	  */
 	   public boolean remove(int target) {
-			   //TODO
+		//TODO
+		return false;
 	   }
      
 	  /* public static IntTreeBag union(IntTreeBag b1, IntTreeBag b2)
@@ -134,6 +138,7 @@ public class IntTreeBag implemnts Cloneable {
 	   */
 	   public static IntTreeBag union(IntTreeBag b1, IntTreeBag b2) {
            //TODO
+	   	return null;
 	   }
 
 	/*
