@@ -1,4 +1,4 @@
-package edu.pfw.richtj03.mod0;
+package mod0;
 
 import java.util.Random;
 

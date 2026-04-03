@@ -1,4 +1,4 @@
-package edu.pfw.richtj03.mod4;
+package mod4;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.io.*;
@@ -24,7 +24,6 @@ import java.io.*;
  *  middle index, traverse from the head. If the target is the middle, do either.
  */
 public class LinkedList<E> implements Cloneable, Iterable<E>, Serializable {
-    @Serial
     private static final long serialVersionUID = 1L;
     private int size;
     private Node<E> head;
@@ -53,7 +52,7 @@ public class LinkedList<E> implements Cloneable, Iterable<E>, Serializable {
     }
 
 
-    class LinkedListIterator<T> implements Iterator<T> {
+    private class LinkedListIterator<T> implements Iterator<T> {
         Node<T> current;
 
         public LinkedListIterator(Node<T> head){

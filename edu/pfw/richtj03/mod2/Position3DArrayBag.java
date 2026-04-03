@@ -5,8 +5,8 @@
    Ethan Quispe - quiseh01@pfw.edu
    Seth Pfister - pfissg01@pfw.edu
 */
-package edu.pfw.richtj03.mod2;
-import edu.pfw.richtj03.mod1.Position3D;
+package mod2;
+import mod1.Position3D;
 // Invariant of the IntArrayBag class:
 // 1. The number of elements in the bag is in the instance variable
 // manyItems, which is no more than data.length.

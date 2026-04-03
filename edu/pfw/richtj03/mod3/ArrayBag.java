@@ -1,8 +1,8 @@
-package edu.pfw.richtj03.mod3;
+package mod3;
 
 /*
     Ellie Pike - pikeas01@pfw.edu
-    Terrell Richey - rich03@pfw.edu
+    Terrell Richey - richtj03@pfw.edu
     Patrick Rall - rallpw0pfw.edu
     Ethan Quispe - quiseh01@pfw.edu
     Seth Pfister - pfissg01@pfw.edu
