@@ -125,7 +125,8 @@ public class LinkedList<E> implements Cloneable, Iterable<E>, Serializable {
         }
         size++;
     }
-/**
+    
+    /*
      If the input is the size of the list, the worst case for the method
      void add(int index, E data) method is O(1). This is because the number
      of operations to add a node to the list remains the same regardless of the
