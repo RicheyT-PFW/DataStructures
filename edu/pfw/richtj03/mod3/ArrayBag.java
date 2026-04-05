@@ -1,8 +1,8 @@
-package edu.pfw.richtj03.mod3;
+package mod3;
 
 /*
     Ellie Pike - pikeas01@pfw.edu
-    Terrell Richey - rich03@pfw.edu
+    Terrell Richey - richtj03@pfw.edu
     Patrick Rall - rallpw0pfw.edu
     Ethan Quispe - quiseh01@pfw.edu
     Seth Pfister - pfissg01@pfw.edu
@@ -10,7 +10,7 @@ package edu.pfw.richtj03.mod3;
 import java.util.Arrays;
 import java.util.Random;
 
-class ArrayBag<E extends Comparable<E>> implements Cloneable {
+public class ArrayBag<E extends Comparable<E>> implements Cloneable {
 
     private E[] data;
     private int manyItems;
@@ -23,11 +23,20 @@ class ArrayBag<E extends Comparable<E>> implements Cloneable {
         data = (E[]) new Comparable<?>[INITIAL_CAPACITY];
         rnd = new Random();
     }
+
     // Overloaded constructor to copy an existing Position3DArrayBag
     public ArrayBag(ArrayBag<E> other) {
         this.manyItems = other.manyItems; // Copy the number of items
         this.data = other.data.clone(); // Allocate new memory for the array
         this.rnd = other.rnd;
+    }
+
+    
+    @SuppressWarnings("unchecked")
+    public ArrayBag(int INITIAL_CAPACITY) {
+        manyItems = 0;
+        data = (E[]) new Comparable<?>[INITIAL_CAPACITY];
+        rnd = new Random();
     }
 
     public void add(E element) {
@@ -39,6 +48,10 @@ class ArrayBag<E extends Comparable<E>> implements Cloneable {
         data[manyItems] = element;
         manyItems++;
     }
+
+    public void remove() {
+        grab();
+    }    
 
     @SuppressWarnings("unchecked")
     public void ensureCapacity(int minimumCapacity) {
@@ -111,6 +124,8 @@ class ArrayBag<E extends Comparable<E>> implements Cloneable {
         }
     }
 
+
+
     public int countOccurrences(E e) {
         int c = 0;
         for (int i = 0; i < manyItems; i++) {
@@ -138,6 +153,17 @@ class ArrayBag<E extends Comparable<E>> implements Cloneable {
         }
         return result;
     }
+
+    // Static method for intersection of two bags
+    public static <E extends Comparable<E>> ArrayBag<E> intersection(ArrayBag<E> bag1, ArrayBag<E> bag2) {
+        // Create a new empty bag with enough capacity to hold all elements
+        ArrayBag<E> result = new ArrayBag<>();
+        result.ensureCapacity(bag1.manyItems + bag2.manyItems);
+
+        //TODO
+
+        return result;
+    }    
 
     public void sort() {
         Arrays.sort(data, 0, manyItems);
@@ -180,6 +206,21 @@ class ArrayBag<E extends Comparable<E>> implements Cloneable {
             }
         }
         return -1;
+    }
+
+    public boolean remove(E target) {
+        int index = indexOf(target);
+        if(index == -1) {
+            return false;
+        }
+
+        //swap the last element and decrease size;
+        data[index] = data[manyItems - 1];
+        data[manyItems - 1] = null;
+        manyItems--;
+
+        return true;
+
     }
 
     // O(log(n))

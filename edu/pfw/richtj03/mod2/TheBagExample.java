@@ -1,5 +1,5 @@
-package edu.pfw.richtj03.mod2;
-import edu.pfw.richtj03.mod1.Position3D;
+package mod2;
+import mod1.Position3D;
 
 
 public class TheBagExample {

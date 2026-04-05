@@ -1,4 +1,4 @@
-package edu.pfw.richtj03.study.ch5;
+package ch5;
 
 class Project1Driver {
 

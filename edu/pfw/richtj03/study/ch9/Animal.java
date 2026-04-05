@@ -1,4 +1,4 @@
-package edu.pfw.richtj03.study.ch9;
+package ch9;
 
 import java.util.Scanner;
 

@@ -1,5 +1,5 @@
-package edu.pfw.richtj03.mod0;
-
+package mod0;
+import hw1.Diamond;
 import java.util.Random;
 
 public class Lock {

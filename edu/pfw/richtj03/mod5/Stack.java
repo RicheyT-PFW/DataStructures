@@ -1,5 +1,5 @@
-package edu.pfw.richtj03.mod5;
-import edu.pfw.richtj03.mod4.LinkedList;
+package mod5;
+import mod4.LinkedList;
 import java.io.*;
 
 public class Stack<E> implements Serializable, Cloneable {

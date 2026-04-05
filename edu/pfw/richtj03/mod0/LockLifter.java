@@ -4,7 +4,7 @@
     This class handles the manipulation of the Lock and the overall game logic.
 */
 
-package edu.pfw.richtj03.mod0;
+package mod0;
 import java.util.Scanner;
 
 public class LockLifter {
@@ -59,7 +59,7 @@ public class LockLifter {
                 }
             }
         }
-    
+        input.close();
     }
 
     public static void main(String[] args) {

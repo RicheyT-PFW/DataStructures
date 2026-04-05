@@ -1,4 +1,4 @@
-package edu.pfw.richtj03.mod3;
+package mod3;
 import java.lang.reflect.Array;
 import java.io.FileNotFoundException;
 import java.io.File;
