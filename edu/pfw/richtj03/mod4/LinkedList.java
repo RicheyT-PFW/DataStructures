@@ -1,4 +1,4 @@
-package edu.pfw.richtj03.mod4;
+package mod4;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.io.*;
