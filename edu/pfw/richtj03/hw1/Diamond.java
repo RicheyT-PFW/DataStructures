@@ -1,4 +1,4 @@
-package edu.pfw.richtj03.hw;
+package hw1;
 import java.util.Arrays;
 public class Diamond implements Cloneable, Comparable<Diamond> {
 

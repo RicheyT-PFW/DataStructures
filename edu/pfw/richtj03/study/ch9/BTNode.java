@@ -1,5 +1,5 @@
 //This is directly from the textbook
-package edu.pfw.richtj03.study.ch9;
+package ch9;
 
 public class BTNode<E> {
 

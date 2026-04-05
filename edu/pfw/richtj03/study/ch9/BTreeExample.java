@@ -1,4 +1,4 @@
-package edu.pfw.richtj03.study.ch9;
+package ch9;
 
 import java.util.Scanner;
 
@@ -163,7 +163,7 @@ public class BTreeExample<E> {
         }
     }
 
-    BTNode<E> root;
+    public BTNode<E> root;
     private static final Scanner stdin = new Scanner(System.in);
 
     public BTreeExample(E data) {

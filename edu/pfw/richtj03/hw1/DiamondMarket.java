@@ -1,6 +1,6 @@
-package edu.pfw.richtj03.hw;
+package hw1;
 
-import edu.pfw.richtj03.mod3.ArrayBag;
+import mod3.ArrayBag;
 
 /***
  * DiamondMarket Class (30 Pts) 

@@ -59,7 +59,7 @@ public class LockLifter {
                 }
             }
         }
-    
+        input.close();
     }
 
     public static void main(String[] args) {
