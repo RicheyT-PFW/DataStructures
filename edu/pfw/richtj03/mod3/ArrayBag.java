@@ -31,7 +31,6 @@ public class ArrayBag<E extends Comparable<E>> implements Cloneable {
         this.rnd = other.rnd;
     }
 
-    
     @SuppressWarnings("unchecked")
     public ArrayBag(int INITIAL_CAPACITY) {
         manyItems = 0;
@@ -51,14 +50,14 @@ public class ArrayBag<E extends Comparable<E>> implements Cloneable {
 
     public void remove() {
         grab();
-    }    
+    }
 
     @SuppressWarnings("unchecked")
     public void ensureCapacity(int minimumCapacity) {
         E[] biggerArray;
         if (data.length < minimumCapacity) {
             biggerArray = (E[]) new Comparable<?>[minimumCapacity];
-            //Tip: shallow copying, but thats OK!
+            // Tip: shallow copying, but thats OK!
             System.arraycopy(data, 0, biggerArray, 0, manyItems);
             data = biggerArray;
         }
@@ -94,14 +93,18 @@ public class ArrayBag<E extends Comparable<E>> implements Cloneable {
 
     // Grab is O(1) because in the end only one integer is being picked
     public E grab() {
-        if (manyItems == 0) return null;
-        else return data[rnd.nextInt(manyItems)];
+        if (manyItems == 0)
+            return null;
+        else
+            return data[rnd.nextInt(manyItems)];
     }
 
     @SafeVarargs
-    // This is O(n) because it iterates through all of the element args, then appends to the existing array, which grows linearly.
+    // This is O(n) because it iterates through all of the element args, then
+    // appends to the existing array, which grows linearly.
     public final void addMany(E... elements) {
-        // reserve 2x the capacity of many items + elements size at the start so we dont resize every iteration.
+        // reserve 2x the capacity of many items + elements size at the start so we dont
+        // resize every iteration.
         if ((manyItems + elements.length) >= data.length) { // Ensure twice as much space as we need.
             ensureCapacity((manyItems + elements.length + 1) * 2);
         }
@@ -123,8 +126,6 @@ public class ArrayBag<E extends Comparable<E>> implements Cloneable {
             manyItems++;
         }
     }
-
-
 
     public int countOccurrences(E e) {
         int c = 0;
@@ -160,10 +161,10 @@ public class ArrayBag<E extends Comparable<E>> implements Cloneable {
         ArrayBag<E> result = new ArrayBag<>();
         result.ensureCapacity(bag1.manyItems + bag2.manyItems);
 
-        //TODO
+        // TODO
 
         return result;
-    }    
+    }
 
     public void sort() {
         Arrays.sort(data, 0, manyItems);
@@ -171,19 +172,21 @@ public class ArrayBag<E extends Comparable<E>> implements Cloneable {
 
     @Override
     public String toString() {
-        /*String str = "[ ";
-        for (E element : data) {
-            if (element != null) {
-                str += element.toString() + ", ";
-            }
-        }
-        str = str.substring(0, str.length() - 2) + " ]";
-        return str;*/
+        /*
+         * String str = "[ ";
+         * for (E element : data) {
+         * if (element != null) {
+         * str += element.toString() + ", ";
+         * }
+         * }
+         * str = str.substring(0, str.length() - 2) + " ]";
+         * return str;
+         */
 
-     StringBuilder sb = new StringBuilder("[");
+        StringBuilder sb = new StringBuilder("[");
         for (int i = 0; i < manyItems; i++) {
             if (data[i] == null) {
-                continue;      
+                continue;
             }
 
             sb.append(data[i].toString());
@@ -210,11 +213,11 @@ public class ArrayBag<E extends Comparable<E>> implements Cloneable {
 
     public boolean remove(E target) {
         int index = indexOf(target);
-        if(index == -1) {
+        if (index == -1) {
             return false;
         }
 
-        //swap the last element and decrease size;
+        // swap the last element and decrease size;
         data[index] = data[manyItems - 1];
         data[manyItems - 1] = null;
         manyItems--;
@@ -230,7 +233,7 @@ public class ArrayBag<E extends Comparable<E>> implements Cloneable {
         if (size <= 0) {
             return -1;
         } else {
-            mid = first + (size/2);
+            mid = first + (size / 2);
             if (target.compareTo(data[mid]) == 0) {
                 return mid;
             } else if (target.compareTo(data[mid]) < 0) {
@@ -242,7 +245,7 @@ public class ArrayBag<E extends Comparable<E>> implements Cloneable {
         return -1;
     }
 
-    public static void main(String[] args) throws CloneNotSupportedException {
+    public static void main() throws CloneNotSupportedException {
         ArrayBag<Integer> intBag = new ArrayBag<>();
         intBag.add(20);
         intBag.add(-100);
@@ -257,23 +260,22 @@ public class ArrayBag<E extends Comparable<E>> implements Cloneable {
         System.out.println("Original Bag (Sorted): " + intBag);
         ArrayBag<Integer> copyBag = intBag.clone();
 
-        //B.iii
+        // B.iii
         System.out.println(intBag.indexOf(99));
         System.out.println(intBag.indexOf(10));
         System.out.println("Copy Bag: " + copyBag.toString());
 
- 
-        //Part D
-        //D.i
-        //D.i.1
+        // Part D
+        // D.i
+        // D.i.1
         System.out.println("Adding 10,000,000 items to the bag");
         Random random = new Random();
         for (int i = 0; i < 10_000_000; i++) {
             intBag.add(random.nextInt());
         }
 
-         System.out.println("Grabbing 20 random items from the bag");
-        //D.i.1.a
+        System.out.println("Grabbing 20 random items from the bag");
+        // D.i.1.a
         Integer[] targets = new Integer[20];
         for (int i = 0; i < targets.length; i++) {
             targets[i] = intBag.grab();
@@ -286,13 +288,12 @@ public class ArrayBag<E extends Comparable<E>> implements Cloneable {
         timeStart = System.nanoTime();
         intBag.sort();
         timeStop = System.nanoTime();
-        long sortTime =  timeStop - timeStart;
+        long sortTime = timeStop - timeStart;
         double seconds = sortTime / 1_000_000_000.0;
 
-
         System.out.println("Seconds taken to sort: " + seconds);
-        //D.i.2
-        
+        // D.i.2
+
         for (Integer i : targets) {
             timeStart = System.nanoTime();
             intBag.indexOf(i);
@@ -306,7 +307,7 @@ public class ArrayBag<E extends Comparable<E>> implements Cloneable {
         seconds = indexTimeDiff / 1_000_000_000.0;
 
         System.out.println("Index Time Difference in seconds: " + seconds);
-        //D.i.3
+        // D.i.3
         long binaryTimeDiff = 0;
         for (Integer i : targets) {
             timeStart = System.nanoTime();
@@ -317,12 +318,81 @@ public class ArrayBag<E extends Comparable<E>> implements Cloneable {
                 binaryTimeDiff = timeStop - timeStart;
             }
         }
-        
+
         System.out.println("Binary Time Difference in seconds: " + (binaryTimeDiff / 1_000_000_000.0));
         timeStart = System.nanoTime();
         intBag.toString();
         timeStop = System.nanoTime();
         System.out.println("Seconds to make toString: " + ((timeStop - timeStart) / 1_000_000_000.0));
-        
+
     }
+
+    // Returns the number of search attempts
+    public int randomSearch(E target) {
+        int i;
+        int count = 0;
+        do {
+            i = rnd.nextInt(manyItems);
+            count++;
+        } while (!data[i].equals(target));
+
+        return count;
+    }
+
+    public static void main(String[] args) throws CloneNotSupportedException {
+        System.out.println("Random Search\n----------------------");
+        ArrayBag<Integer> intBag100 = new ArrayBag<>(100);
+        ArrayBag<Integer> intBag1000 = new ArrayBag<>(1_000);
+        ArrayBag<Integer> intBag10000 = new ArrayBag<>(10_000);
+        int target;
+        int index;
+        int[] searchCounts = new int[3];
+
+        Random random = new Random();
+        for (int i = 0; i < 100; i++) {
+            intBag100.add(random.nextInt());
+        }
+
+        for (int i = 0; i < 1_000; i++) {
+            intBag1000.add(random.nextInt());
+        }
+
+        for (int i = 0; i < 10_000; i++) {
+            intBag10000.add(random.nextInt());
+        }
+
+        index = 0;
+        target = intBag100.grab();
+        while (index < 100) {
+            searchCounts[0] += intBag100.randomSearch(target);
+            index++;
+        }
+        System.out.printf("100 item bag average search count: %.2f \n", searchCounts[0] / 100.00);
+        System.out.println("----------------------------------------");
+
+        index = 0;
+        System.out.println();
+        target = intBag1000.grab();
+        while (index < 100) {
+            searchCounts[1] += intBag1000.randomSearch(target);
+            index++;
+        }
+        System.out.printf("1,000 item bag average search count: %.2f \n", searchCounts[1] / 100.00);
+        System.out.println("----------------------------------------");
+
+        index = 0;
+        System.out.println();
+        target = intBag10000.grab();
+        while (index < 100) {
+            searchCounts[2] += intBag10000.randomSearch(target);
+            index++;
+        }
+        System.out.printf("10,000 item bag average search count: %.2f \n", searchCounts[2] / 100.00);
+        System.out.println("----------------------------------------");
+        System.out.println("If n is the number of items in a bag, the number of searches will be ≈ n");
+        System.out.printf("Average search count for Random Search: %f%n",
+                (searchCounts[0] + searchCounts[1] + searchCounts[2]) / 300.00);
+        System.out.println("Average time complexity for random search: Θ(n)");
+    }
+
 }
