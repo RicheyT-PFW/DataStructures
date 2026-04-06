@@ -1,3 +1,4 @@
+package mod7;
 /*
 PART A: 
 
@@ -21,9 +22,6 @@ PART C:
 
    ii. Debug the last line of the remove recursion to fully understand how the leaf node is removed.  
  */
-
-
-package mod7;
 
 public class BinarySearchTree<E extends Comparable<E>> { 
     private TreeNode<E> root; 
