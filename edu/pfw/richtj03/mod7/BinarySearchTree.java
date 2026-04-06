@@ -39,9 +39,15 @@ public class BinarySearchTree<E extends Comparable<E>> {
 
     // Helper method for add recursion 
     private TreeNode<E> add(TreeNode<E> node, E data) {
+        if(node == root && root == null && size == 0 && data != null) {
+            root = new TreeNode<E>(data, null, null);
+            return root;
+        }
+        
+        
         if(node == null || data == null) {
             throw new IllegalStateException(
-                "Neither node or data can be null in 'TreeNode<E> add(TreeNode<E> node, E data)'");
+                "Unless this was the first call, neither node or data can be null in 'TreeNode<E> add(TreeNode<E> node, E data)'");
         }
 
         //If data is equal to or less than the current node
@@ -52,7 +58,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
             } else {
                 add(node.getLeft(), data);
             }
-            
+
         // If data is greater than the current node
         } else if(node.getData().compareTo(data) > 0) {
             if(node.getRight() == null) {
@@ -86,15 +92,23 @@ public class BinarySearchTree<E extends Comparable<E>> {
             // Found the node to be deleted 
             // Node with only one child or no child 
             //TODO If only one child, return that child 
-             
+            if(node.getChildCount() == 1) {
+                if(node.getLeft() == null) {
+                    return node.getRight();
+                } else {
+                    return node.getLeft();
+                }
+            }
 
              
 
              
             // Node with two children: 
-            // TODO Get the inorder successor (smallest node greater than this node) 
+            // TODO Get the inorder successor (smallest node greater than this node)
+                TreeNode<E> successor = node.getRight();
              
-            // TODO Copy the inorder successor's content to this node 
+            // TODO Copy the inorder successor's content to this node
+            node.setData(successor.getData());
              
 
             // Delete the inorder successor 
@@ -119,11 +133,12 @@ public class BinarySearchTree<E extends Comparable<E>> {
     // Helper method for printInOrder recursion 
     private void printInOrder(TreeNode<E> node) { 
         if (node != null) { 
-            //TODO 
             //Recurse left 
+            printInOrder(node.getLeft());
             //Print node data 
-
+            System.out.println(node);
             //Recurse right 
+            printInOrder(node.getRight());
         } 
     } 
  

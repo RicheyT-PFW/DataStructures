@@ -88,6 +88,20 @@ public class TreeNode<E> {
         return right.getRightMost();
     }
 
+    public int getChildCount() {
+        int count = 0;
+
+        if (left != null) {
+            count++;
+        }
+
+        if (right != null) {
+            count++;
+        }
+
+        return count;
+    }    
+
 
     public static void main(String[] args) {
         //
