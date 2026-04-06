@@ -6,11 +6,13 @@ private T[] data;
 private int itemCount = 0;
 private final int DEFAULT_CAPACITY = 10;
 
+    @SuppressWarnings("unchecked")
     public GenericSequence() {
         this.data = (T[]) new Comparable<?>[DEFAULT_CAPACITY];
     }
 
 
+    @SuppressWarnings("unchecked")
     public GenericSequence(int capacity) {
         this.data = (T[]) new Comparable<?>[capacity];
     }
