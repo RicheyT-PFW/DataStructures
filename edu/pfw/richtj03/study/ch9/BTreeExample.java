@@ -1,4 +1,4 @@
-package ch9;
+package study.ch9;
 
 import java.util.Scanner;
 

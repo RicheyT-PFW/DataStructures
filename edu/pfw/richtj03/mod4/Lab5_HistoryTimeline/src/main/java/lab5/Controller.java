@@ -1,4 +1,4 @@
-package lab5;
+package mod4.lab5;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

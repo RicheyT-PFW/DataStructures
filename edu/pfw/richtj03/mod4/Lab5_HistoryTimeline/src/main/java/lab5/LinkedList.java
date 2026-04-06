@@ -1,4 +1,4 @@
-package lab5;
+package mod4.lab5;
 
 import java.util.ListIterator;
 import java.util.NoSuchElementException;

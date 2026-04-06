@@ -1,4 +1,4 @@
-package ch5;
+package study.ch5;
 
 public class GenericSequence <T extends Comparable<T>> {
 

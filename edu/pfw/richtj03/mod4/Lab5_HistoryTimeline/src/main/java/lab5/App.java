@@ -1,4 +1,4 @@
-package lab5;
+package mod4.lab5;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,7 +17,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/main.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/lab5/main.fxml"));
         Parent p = fxmlLoader.load();
         scene = new Scene(p);
         stage.setScene(scene);

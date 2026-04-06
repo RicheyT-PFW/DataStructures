@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="650.0" prefWidth="900.0" stylesheets="@../lab5/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lab5.Controller">
+<BorderPane prefHeight="650.0" prefWidth="900.0" stylesheets="@../lab5/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mod4.lab5.Controller">
    <bottom>
       <HBox alignment="CENTER_LEFT" prefHeight="50.0" spacing="20.0" BorderPane.alignment="CENTER_LEFT">
          <children>

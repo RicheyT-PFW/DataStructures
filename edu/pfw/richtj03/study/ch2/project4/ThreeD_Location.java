@@ -1,4 +1,4 @@
-package ch2.project4;
+package study.ch2.project4;
 
 public class ThreeD_Location implements Cloneable {
     private double x;
