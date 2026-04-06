@@ -36,10 +36,34 @@ public class BinarySearchTree<E extends Comparable<E>> {
         root = add(root, data); 
         size++; 
     } 
+
     // Helper method for add recursion 
-    private TreeNode<E> add(TreeNode<E> node, E data) { 
-        //TODO 
-         
+    private TreeNode<E> add(TreeNode<E> node, E data) {
+        if(node == null || data == null) {
+            throw new IllegalStateException(
+                "Neither node or data can be null in 'TreeNode<E> add(TreeNode<E> node, E data)'");
+        }
+
+        //If data is equal to or less than the current node
+        if(node.getData().equals(data) || node.getData().compareTo(data) < 0 ) {
+            if(node.getLeft() == null) {
+                node.setLeft(new TreeNode(data, null, null));
+                return node.getLeft();
+            } else {
+                add(node.getLeft(), data);
+            }
+            
+        // If data is greater than the current node
+        } else if(node.getData().compareTo(data) > 0) {
+            if(node.getRight() == null) {
+                node.setRight(new TreeNode(data, null, null));
+                return node.getRight();
+            } else {
+                add(node.getRight(), data);
+            }
+        }
+
+         return null;
     } 
  
     public E remove(E data) { 
