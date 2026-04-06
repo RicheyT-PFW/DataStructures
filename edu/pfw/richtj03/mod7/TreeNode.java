@@ -7,11 +7,11 @@ package mod7;
     Seth Pfister - pfissg01@pfw.edu
 */
 
-public class BTNode<E> {
+public class TreeNode<E> {
     private E data;
-    private BTNode<E> left, right;
+    private TreeNode<E> left, right;
 
-    public BTNode(E initialData, BTNode<E> initialLeft, BTNode<E> initialRight) {
+    public TreeNode(E initialData, TreeNode<E> initialLeft, TreeNode<E> initialRight) {
         data = initialData;
         left = initialLeft;
         right = initialRight;
@@ -22,21 +22,21 @@ public class BTNode<E> {
     public E getData() {
         return data;
     }
-    public void setLeft(BTNode<E> newLeft) {
+    public void setLeft(TreeNode<E> newLeft) {
         left = newLeft;
     }
-    public BTNode<E> getLeft() {
+    public TreeNode<E> getLeft() {
         return left;
     }
-    public void setRight(BTNode<E> newRight) {
+    public void setRight(TreeNode<E> newRight) {
         right = newRight;
     }
-    public BTNode<E> getRight() {
+    public TreeNode<E> getRight() {
         return right;
     }
 
 
-    public static <E> long treeSize(BTNode<E> root) {
+    public static <E> long treeSize(TreeNode<E> root) {
         if (root == null)
             return 0;
         else
@@ -60,7 +60,7 @@ public class BTNode<E> {
         buildSide(right, sb, depth, left);
         buildSide(left, sb, depth, right);
     }
-    private void buildSide(BTNode<E> branch1, StringBuilder sb, int depth, BTNode<E> branch2) {
+    private void buildSide(TreeNode<E> branch1, StringBuilder sb, int depth, TreeNode<E> branch2) {
         if (branch1 != null) {
             branch1.buildString(sb, depth + 1);
         } else if (branch2 != null) {
@@ -71,7 +71,7 @@ public class BTNode<E> {
         }
     }
     // The time complexity is O(n)
-    public BTNode<E> getLeftMost() {
+    public TreeNode<E> getLeftMost() {
         if(this.left == null) {
             return this;
         }
@@ -80,7 +80,7 @@ public class BTNode<E> {
     }
 
     // The time complexity is O(n)
-    public BTNode<E> getRightMost() {
+    public TreeNode<E> getRightMost() {
         if(this.right == null) {
             return this;
         }
@@ -91,15 +91,15 @@ public class BTNode<E> {
 
     public static void main(String[] args) {
         //
-        BTNode<Integer> oneNode = new BTNode<>(1, null, null);
-        BTNode<Integer> sevenNode = new BTNode<>(7, null, null);
-        BTNode<Integer> nineNodeA = new BTNode<>(9, null, null);
-        BTNode<Integer> twoNode = new BTNode<>(2, null, null);
-        BTNode<Integer> sixNode = new BTNode<>(6, null, null);
-        BTNode<Integer> nineNodeB = new BTNode<>(9, null, null);
-        BTNode<Integer> fiveNodeA = new BTNode<>(5, null, null);
-        BTNode<Integer> elevenNode = new BTNode<>(11, null, null);
-        BTNode<Integer> fiveNodeB = new BTNode<>(5, null, null);
+        TreeNode<Integer> oneNode = new TreeNode<>(1, null, null);
+        TreeNode<Integer> sevenNode = new TreeNode<>(7, null, null);
+        TreeNode<Integer> nineNodeA = new TreeNode<>(9, null, null);
+        TreeNode<Integer> twoNode = new TreeNode<>(2, null, null);
+        TreeNode<Integer> sixNode = new TreeNode<>(6, null, null);
+        TreeNode<Integer> nineNodeB = new TreeNode<>(9, null, null);
+        TreeNode<Integer> fiveNodeA = new TreeNode<>(5, null, null);
+        TreeNode<Integer> elevenNode = new TreeNode<>(11, null, null);
+        TreeNode<Integer> fiveNodeB = new TreeNode<>(5, null, null);
 
         //Connect Nodes
         /*
