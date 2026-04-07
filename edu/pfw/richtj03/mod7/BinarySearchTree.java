@@ -39,38 +39,30 @@ public class BinarySearchTree<E extends Comparable<E>> {
 
     // Helper method for add recursion 
     private TreeNode<E> add(TreeNode<E> node, E data) {
-        if(node == root && root == null && size == 0 && data != null) {
+        if(root == null) {
             root = new TreeNode<E>(data, null, null);
             return root;
         }
-        
-        
-        if(node == null || data == null) {
-            throw new IllegalStateException(
-                "Unless this was the first call, neither node or data can be null in 'TreeNode<E> add(TreeNode<E> node, E data)'");
-        }
 
         //If data is equal to or less than the current node
-        if(node.getData().equals(data) || node.getData().compareTo(data) < 0 ) {
+        if(data.compareTo(node.getData()) <= 0) {
             if(node.getLeft() == null) {
                 node.setLeft(new TreeNode(data, null, null));
-                return node.getLeft();
             } else {
                 add(node.getLeft(), data);
             }
 
         // If data is greater than the current node
-        } else if(node.getData().compareTo(data) > 0) {
+        } else if(data.compareTo(node.getData()) > 0) {
             if(node.getRight() == null) {
                 node.setRight(new TreeNode(data, null, null));
-                return node.getRight();
             } else {
                 add(node.getRight(), data);
             }
         }
 
-         return null;
-    } 
+         return root;
+   } 
  
     public E remove(E data) { 
         TreeNode<E> removedNode = remove(root, data); 
@@ -104,15 +96,17 @@ public class BinarySearchTree<E extends Comparable<E>> {
 
              
             // Node with two children: 
+	    if(node.getChildCount() == 2) {	
             // TODO Get the inorder successor (smallest node greater than this node)
-                TreeNode<E> successor = node.getRight();
+                TreeNode<E> successor = node.getRight().getLeftMost();
              
             // TODO Copy the inorder successor's content to this node
             node.setData(successor.getData());
              
 
             // Delete the inorder successor 
-            node.setRight(remove(node.getRight(), successor.getData())); 
+            node.setRight(remove(node.getRight(), successor.getData()));
+	    } 
         } 
         return node; 
     } 
@@ -170,7 +164,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
  
         System.out.println(bst); 
  
-        //bst.printInOrder(); 
+        bst.printInOrder(); 
  
         System.out.println("Tree contains " + bst.size() + " nodes."); 
         System.out.println("Tree contains 50: " + bst.contains(50));  // Expected output: true 
@@ -179,14 +173,14 @@ public class BinarySearchTree<E extends Comparable<E>> {
         bst.add(25); 
         System.out.println("After adding 25:\n" + bst); 
  
-        //bst.remove(50); 
-        //System.out.println("After removing 50:\n" + bst); 
+        bst.remove(50); 
+        System.out.println("After removing 50:\n" + bst); 
  
-        //bst.remove(40); 
-        //System.out.println("After removing 40:\n" + bst); 
+        bst.remove(40); 
+        System.out.println("After removing 40:\n" + bst); 
  
-        //bst.remove(20); 
-        //System.out.println("After removing 20:\n" + bst); 
+        bst.remove(20); 
+        System.out.println("After removing 20:\n" + bst); 
     } 
 } 
 
