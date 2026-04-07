@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "BinarySearchTree",
+            "request": "launch",
+            "mainClass": "mod7.BinarySearchTree",
+            "projectName": "DataStructures_b1e39f2c"
+        },
+        {
+            "type": "java",
             "name": "BTreeExample",
             "request": "launch",
             "mainClass": "edu.pfw.richtj03.study.ch9.BTreeExample",
