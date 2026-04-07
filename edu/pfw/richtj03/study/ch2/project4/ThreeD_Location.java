@@ -1,4 +1,4 @@
-package project4;
+package study.ch2.project4;
 
 public class ThreeD_Location implements Cloneable {
     private double x;
@@ -23,7 +23,7 @@ public class ThreeD_Location implements Cloneable {
 
         if (coords.length != 3) {
             throw new IllegalArgumentException(
-                    "'public ThreeD_Location(double[] coords)' threw an IllegalArgumentException because the coords.length must be 3 to represent a 3D point");
+                    "'public ThreeD_Location(double[] coords)' threw an IllegalArgumentException because coords.length must be 3 to represent a 3D point");
         }
         this.x = coords[0];
         this.y = coords[1];

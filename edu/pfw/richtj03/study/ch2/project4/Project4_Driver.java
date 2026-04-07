@@ -1,4 +1,4 @@
-package project4;
+package study.ch2.project4;
 
 
 public class Project4_Driver {

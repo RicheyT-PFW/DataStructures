@@ -1,5 +1,5 @@
 //This is directly from the textbook
-package edu.pfw.richtj03.study.ch9;
+package study.ch9;
 
 public class BTNode<E> {
 
@@ -120,7 +120,7 @@ public class BTNode<E> {
         if (this.right == null) {
             return this.left;
         } else {
-            this.right = this.removeRightMost();
+            right = right.removeRightMost();
             return this;
         }
     }

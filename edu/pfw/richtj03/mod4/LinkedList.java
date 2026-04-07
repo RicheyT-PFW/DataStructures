@@ -1,6 +1,7 @@
-package edu.pfw.richtj03.mod4;
+package mod4;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.io.*;
 
 /******************************************************************************
  * A LinkedList<E> provides a generic singly linked list implementation.
@@ -22,8 +23,7 @@ import java.util.NoSuchElementException;
  *  the target is greater than the middle index, traverse from the tail. If less than the
  *  middle index, traverse from the head. If the target is the middle, do either.
  */
-public class LinkedList<E> implements Cloneable, Iterable<E>, java.io.Serializable {
-    @java.io.Serial
+public class LinkedList<E> implements Cloneable, Iterable<E>, Serializable {
     private static final long serialVersionUID = 1L;
     private int size;
     private Node<E> head;
@@ -52,7 +52,7 @@ public class LinkedList<E> implements Cloneable, Iterable<E>, java.io.Serializab
     }
 
 
-    class LinkedListIterator<T> implements Iterator<T> {
+    private class LinkedListIterator<T> implements Iterator<T> {
         Node<T> current;
 
         public LinkedListIterator(Node<T> head){
@@ -88,6 +88,18 @@ public class LinkedList<E> implements Cloneable, Iterable<E>, java.io.Serializab
      * Creates an empty LinkedList
      **/
     public LinkedList() {}
+
+    @Override
+    public LinkedList<E> clone() {
+
+        LinkedList <E> clone = null;
+        try{
+            clone = (LinkedList<E>) super.clone();
+        } catch(Exception e) {
+            System.out.print(e);
+        }
+        return clone;
+    } 
     
     
     @Override
@@ -112,7 +124,8 @@ public class LinkedList<E> implements Cloneable, Iterable<E>, java.io.Serializab
         }
         size++;
     }
-/**
+    
+    /*
      If the input is the size of the list, the worst case for the method
      void add(int index, E data) method is O(1). This is because the number
      of operations to add a node to the list remains the same regardless of the

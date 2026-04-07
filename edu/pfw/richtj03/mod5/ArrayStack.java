@@ -1,4 +1,4 @@
-package org.example;
+package mod5;
 
 /*
     Ellie Pike - pikeas01@pfw.edu
@@ -13,11 +13,13 @@ import java.util.EmptyStackException;
 class ArrayStack<E> {
     private E[] data;
     private int size;
+
     public ArrayStack() {
         final int INITIAL_CAPACITY = 10;
         size = 0;
         data = (E[]) Array.newInstance(Object.class, INITIAL_CAPACITY);
     }
+
     public ArrayStack(int initialCapacity) {
         if (initialCapacity < 0)
             throw new IllegalArgumentException
@@ -25,6 +27,7 @@ class ArrayStack<E> {
         size = 0;
         data = (E[]) Array.newInstance(Object.class, initialCapacity);
     }
+
     public void ensureCapacity(int minimumCapacity) {
         E[] biggerArray;
         if (data.length < minimumCapacity) {
@@ -33,22 +36,28 @@ class ArrayStack<E> {
             data = biggerArray;
         }
     }
+
     public boolean isEmpty() {
         return (size == 0);
     }
 
+    public boolean isFull() {
+        return (size == data.length);
+    }
+
     // Return the top item from the stack (end of the array)
     public E peek() {
-        if (size == 0)
+        if (isEmpty())
             throw new EmptyStackException();
         return data[size - 1];
     }
+
     // Remove the top item from the stack (end of the array)
     // The worst-case runtime for this method is O(1). This is because we never have to ensure capacity in this method.
     // In addition to that, the number of operations to remove an item from the stack is constant. Therefore, the worst-case
     // runtime is O(1)
     public E pop() throws EmptyStackException {
-        if(size == 0) {
+        if(isEmpty()) {
             throw new EmptyStackException();
         }
         E item = data[size - 1];
@@ -59,16 +68,15 @@ class ArrayStack<E> {
     // Add an item to the top of the stack (end of the array)
     // O(n) - worst case is data is full and then we have to resize which involved arraycopy which is an O(n) operation
     public void push(E item) {
-        if (size == data.length) { // Ensure twice as much space as we need.
+        // Ensure twice as much space as we need.
+        if (isFull()) { 
             ensureCapacity((size + 1) * 2);
         }
-        if (size == 0) {
-            data[size] = item;
-        } else {
-            data[size - 1] = item;
-        }
+
+        data[size] = item;
         size++;
     }
+
     public int size() {
         return size;
     }
@@ -84,6 +92,7 @@ class ArrayStack<E> {
         sb.append("\\----/");
         return sb.toString();
     }
+    
     public static void main(String[] args) {
         String[] elements = {"D", "A", "T", "A",
                 "S", "T", "R", "U", "C", "T", "U", "R", "E", "S"};

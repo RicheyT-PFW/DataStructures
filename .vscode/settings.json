@@ -1,0 +1,9 @@
+{
+    "window.autoDetectColorScheme": true,
+    "workbench.preferredDarkColorTheme": "Dark+",
+    "java.server.launchMode": "LightWeight",
+    "java.project.referencedLibraries": [
+        "/opt/javaFX/javafx-sdk-21.0.10/lib/*.jar"
+    ],
+    "java.updateImportsOnPaste.enabled": false
+}

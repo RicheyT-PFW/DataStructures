@@ -3,8 +3,8 @@
  * CS260 - Lab 2
  * */
 
-package edu.pfw.richtj03.mod2;
-import edu.pfw.richtj03.mod1.Position3D;
+package mod2;
+import mod1.Position3D;
 
 /** Lab 2: Position3D Enhancements
 
