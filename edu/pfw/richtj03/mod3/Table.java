@@ -55,7 +55,7 @@ public class Table<K, V> {
      * A hash function used in Java's HashMap
      * Expects the table size to be a power of 2
      */
-  /*  private int hash(K key) {
+   /* private int hash(K key) {
         int h = 0;
         //Performs a bitwise exclusive OR of the two halves of the 32-bit int from hashCode().
         if (key != null) {
@@ -63,7 +63,7 @@ public class Table<K, V> {
             h = (h >>> 16) % data.length; // Shift 32-bit to the right by 16 bits and compress to the size of the table
         }
         return h;
-    }*/
+    } */
     private int nextIndex(int i) {
         if (i + 1 == data.length)
             return 0;
@@ -81,21 +81,21 @@ public class Table<K, V> {
         if (index != -1) { // The key is already in the table.
             answer = data[index];
             data[index] = element;
+            collisionCount++;
             return answer;
         } else if (manyItems < data.length) { // The Table is not full.
             index = hash(key);
             while (keys[index] != null) {
                 index = nextIndex(index);
-		collision=true;
+		        collisionCount++;
 	    }
 
-	    if(collision==true) 
-	    	collisionCount++;
-	    keys[index] = key;
+	   // if(collision==true) 
+	        keys[index] = key;
             data[index] = element;
             hasBeenUsed[index] = true;
             manyItems++;
-	    setLoadFactor();
+	        setLoadFactor();
             return null;
         } else
 	   // The table is full.
@@ -170,9 +170,10 @@ public static void main(String[] args) {
 	String buffer;
 	String key;
 	String value;
-        Table<String, String> tbl = new Table<>(capacity);
+    Table<String, String> tbl = new Table<>(capacity);
+    String ssnPath = Table.class.getResource("/lab4/SSN_NAME.csv").getFile();
 	
-	File ssnFile = new File("./edu/pfw/richtj03/assets/SSN_NAME.csv");
+	File ssnFile = new File(ssnPath);
 	try(Scanner scanner = new Scanner(ssnFile)) {
 	    while(scanner.hasNextLine()) {
 		buffer = scanner.nextLine();
@@ -182,8 +183,8 @@ public static void main(String[] args) {
 		 value = buffer.substring(i+1);
 		 tbl.put(key,value);
 		 System.out.println(value + " has been added with ssn " + key + "\n");
-                 System.out.println("Current Load Factor: " + tbl.getLoadFactor());
-                 System.out.println();
+         System.out.println("Current Load Factor: " + tbl.getLoadFactor());
+         System.out.println();
 		 break;
 		 }
 		}
@@ -193,6 +194,6 @@ public static void main(String[] args) {
 	    System.err.println(e.getMessage());
 	}
 	System.out.println("Table Item Count: " + tbl.size());
-	System.out.println(tbl.getCollisionCount());
+	System.out.println("Table Collision Count: " + tbl.getCollisionCount());
     }
 }

@@ -1,0 +1,15 @@
+.label {
+    -fx-text-fill: white;
+}
+
+.gamewindow{
+    -fx-background-color: darkslateblue;
+    -fx-border-color: white;
+}
+
+.gamepane{
+    -fx-background-color: darkblue;
+    -fx-border-color: teal;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+}
