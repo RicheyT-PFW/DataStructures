@@ -36,8 +36,8 @@ public class Graph<E> {
      *      Indicates that the source or target was not a valid vertex number.
      */  
     public int add(int source, int target) {
-    
-        }
+        return 0;
+    }
     
     /**
      * public boolean isEdge(int source, int target)
@@ -54,7 +54,7 @@ public class Graph<E> {
      */
 
     public boolean isEdge(int source, int target) {
-
+        return false;
     }
 
 
@@ -155,7 +155,7 @@ public class Graph<E> {
      */
 
     public int size () {
-        return null;
+        return 0;
     }
 
     
