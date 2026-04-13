@@ -1,6 +1,9 @@
 package study.ch14;
 
 public class Graph<E> {
+
+    private boolean[][] edges;
+    private E[] labels;
     /**
      * Constructor for the Graph<E>
      * public Graph(int n)
@@ -18,8 +21,10 @@ public class Graph<E> {
      *      Indicates that n is negative.
      */
 
+    @SuppressWarnings("unchecked")
     public Graph(int n) {
-
+        edges = new boolean[n][n];
+        labels = (E[]) new Object[n];
     }
 
     /**
@@ -35,8 +40,8 @@ public class Graph<E> {
      * Throws: ArrayIndexOutOfBoundsException
      *      Indicates that the source or target was not a valid vertex number.
      */  
-    public int add(int source, int target) {
-        return 0;
+    public void addEdge(int source, int target) {
+        edges[source][target] = true;
     }
     
     /**
@@ -54,7 +59,7 @@ public class Graph<E> {
      */
 
     public boolean isEdge(int source, int target) {
-        return false;
+       return edges[source][target];
     }
 
 
@@ -75,7 +80,7 @@ public class Graph<E> {
      */
 
     public void removeEdge(int source, int target) {
-    
+        edges[source][target] = false;
     }
 
     /**
@@ -88,8 +93,20 @@ public class Graph<E> {
      *      Indicates insufficient memory for creating the clone.
      */
 
+    @SuppressWarnings("unchecked")
     public Graph<E> clone() {
-        return null;
+        Graph<E> answer;
+
+        try {
+            answer = (Graph<E>) super.clone();
+        } catch(CloneNotSupportedException e) {
+            throw new RuntimeException("This class does not implement Cloneable");
+        }
+
+        answer.edges = edges.clone();
+        answer.labels = labels.clone();
+
+        return answer;
     }
 
  
@@ -107,8 +124,9 @@ public class Graph<E> {
      * 
      */
 
+    @SuppressWarnings("unchecked")
     public E getLabel(int vertex) {
-        return null;
+        return labels[vertex];
     }
 
      /**
@@ -126,7 +144,30 @@ public class Graph<E> {
      */
 
     public int[] neighbors(int vertex) {
-        return null;
+        int i;
+        int count;
+        int[] answer;
+
+        // First count how many edges have the vertex as their source:
+        count = 0;
+        for(i = 0; i < labels.length; i++) {
+            if(edges[vertex][i]) {
+                count++;
+            }
+        }
+
+        // Allocate the array for the answer:
+        answer = new int[count];
+
+        // Fill the array for the answer:
+        count = 0;
+        for(i = 0; i < labels.length; i++) {
+            if(edges[vertex][i]) {
+                answer[count++] = i;
+            }
+        }
+
+        return answer;
     }
 
      /**
@@ -143,8 +184,8 @@ public class Graph<E> {
      *      Indicates that the vertex  was not a valid vertex number
      */
 
-    public int[] setLabel (int vertex, E newLabel) {
-        return null;
+    public void setLabel (int vertex, E newLabel) {
+        labels[vertex] = newLabel;
     }
 
      /**
@@ -155,9 +196,14 @@ public class Graph<E> {
      */
 
     public int size () {
-        return 0;
+        return labels.length;
     }
 
-    
-    
+    public static void main(String[] args) {
+        Graph<String> graph = new Graph<>(10);
+        System.out.println(graph.size());
+        System.out.println(graph.getLabel(0));
+        graph.setLabel(0, "v0");
+        System.out.println(graph.getLabel(0));
+    }
 }
