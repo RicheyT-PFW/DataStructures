@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Graph",
+            "request": "launch",
+            "mainClass": "study.ch14.Graph",
+            "projectName": "DataStructures_b1e39f2c"
+        },
+        {
+            "type": "java",
             "name": "Deque",
             "request": "launch",
             "mainClass": "mod6.Deque",
