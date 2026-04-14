@@ -199,11 +199,45 @@ public class Graph<E> {
         return labels.length;
     }
 
+
+
+    public Graph<String> crocodileAirlinesRoutes() {
+	Graph<String> graph = new Graph<>(9);
+
+	//
+	graph.setLabel(0, "Darwin");
+	graph.setLabel(1, "Brisbane");
+	graph.setLabel(2, "Sydney");
+	graph.setLabel(3, "Hobart");
+	graph.setLabel(4, "Melbourne");
+	graph.setLabel(5, "Adelaide");
+	graph.setLabel(6, "Cabnerra");
+	graph.setLabel(7, "Perth");
+	graph.setLabel(8, "Black Stump");
+
+
+	graph.addEdge(0,6);
+	graph.addEdge(8,0); 
+	graph.addEdge(1,2);
+	graph.addEdge(7,8);
+	graph.addEdge(5,7);
+	graph.addEdge(5,4);
+	graph.addEdge(4,3);
+	graph.addEdge(3,4);
+	graph.addEdge(4,6);
+	graph.addEdge(6,5);
+	graph.addEdge(6,1);
+	graph.addEdge(6,2);
+	graph.addEdge(2,6);
+	graph.addEdge(2,4);
+
+	return graph;
+	
+    } 
+
+
     public static void main(String[] args) {
-        Graph<String> graph = new Graph<>(10);
-        System.out.println(graph.size());
-        System.out.println(graph.getLabel(0));
-        graph.setLabel(0, "v0");
-        System.out.println(graph.getLabel(0));
+        Graph<String> graph = crocodileAirlinesRoute();
+	
     }
 }
