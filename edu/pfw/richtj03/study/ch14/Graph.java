@@ -223,72 +223,82 @@ public class Graph<E> {
         graph.addEdge(1, 0);
         graph.addEdge(2, 6);
         graph.addEdge(3, 1);
-        graph.addEdge(4, 3);
         graph.addEdge(4, 7);
         graph.addEdge(4, 3);
         graph.addEdge(5, 2);
         graph.addEdge(5, 6);
+        graph.addEdge(5, 4);
         graph.addEdge(6, 5);
         graph.addEdge(6, 7);
         graph.addEdge(7, 8);
         graph.addEdge(7, 5);
         graph.addEdge(8, 7);
-
         return graph;
     }
 
-    public static <E> void depthFirstRecurse(Graph<E> g, boolean[] marked, Stack<Integer> stk) {
-        int[] connections = g.neighbors(stk.peek());
-        int v = stk.pop();
+    public static <E> void depthFirstRecurse(Graph<E> g, int v, boolean[] marked) {
+        
+        // Get the possible actions from the current state
+        int[] connections = g.neighbors(v);
+        int i;
 
-        marked[v] = true;
+        // Processing the current vertex
         System.out.println(g.getLabel(v));
 
-        // Traverse all the neighbors, looking for unmarked vertices:
+        // Mark the current vertex as explored after we remove it from the frontier 
+        marked[v] = true;
+       
+
+        // Add the next possible action from the current state to the frontier and explore it
         for (int nextNeighbor : connections) {
             if (!marked[nextNeighbor]) {
-                stk.push(nextNeighbor);
-                depthFirstRecurse(g, marked, stk);
+                depthFirstRecurse(g, nextNeighbor, marked);
             }
        }
     }
 
     public static <E> void depthFirstPrint(Graph<E> g, int start) {
+        // Making explored structure
         boolean[] marked = new boolean[g.size()];
-        Stack<Integer> stk = new Stack<>();
-        marked[start] = true;
-        stk.push(start);
-        depthFirstRecurse(g, marked, stk);
+
+        //Exploring the frontier
+        depthFirstRecurse(g, start, marked);
     }
 
     public static <E> void breadthFirstPrint(Graph<E> g, int start) {
         boolean[] marked = new boolean[g.size()];
+        boolean[] inFrontier = new boolean[g.size()];
         Queue<Integer> q = new Queue<>();
-        marked[start] = true;
+        inFrontier[start] = true;
         q.enqueue(start);
-        breadthFirstRecurse(g, marked, q);
+        breadthFirstRecurse(g, marked, inFrontier, q);
     }
 
-    private static <E> void breadthFirstRecurse(Graph<E> g, boolean[] marked, Queue<Integer> queue) {
-        // Base case
+    private static <E> void breadthFirstRecurse(Graph<E> g, boolean[] marked, boolean[] inFrontier, Queue<Integer> queue) {
+        // Base case: Frontier is empty
         if (queue.isEmpty()) {
             return;
         }
 
+        // Remove a vertex from the frontier
         int v = queue.dequeue();
+        inFrontier[v] = false;
+
+        // Process vertex and mark as done
         System.out.println(g.getLabel(v));
+        marked[v] = true;
+
 
         // enqueue all unmarked neighbors
         for (int nextNeighbor : g.neighbors(v)) {
-            if (!marked[nextNeighbor]) {
-                marked[nextNeighbor] = true; // mark when enqueuing to avoid duplicates
+            if (!marked[nextNeighbor] && !inFrontier[nextNeighbor]) {
+                inFrontier[nextNeighbor] = true; 
                 queue.enqueue(nextNeighbor);
             }
         }
 
         // recurse to process next in queue
-            breadthFirstRecurse(g, marked, queue);
-
+        breadthFirstRecurse(g, marked, inFrontier, queue);
     }
 
     public static void main(String[] args) {
