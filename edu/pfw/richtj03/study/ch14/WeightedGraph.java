@@ -159,7 +159,7 @@ public Map<V, Integer> dijkstra(V startV, Map<V,V> previous) {
 
     System.out.println(mapGraph);
 
-    // Dijkstra's algorithm
+  /*  // Dijkstra's algorithm
     Map<String, String> previous = new HashMap<>();
     Map<String, Integer> distances = mapGraph.dijkstra("Fort Wayne", previous);
     System.out.println("Shortest Distances from Fort Wayne: " + distances);
@@ -185,7 +185,7 @@ public Map<V, Integer> dijkstra(V startV, Map<V,V> previous) {
     Shortest path from Fort Wayne to Wabash: [Fort Wayne, Columbia City, Wabash]
     Shortest distances from Bluffton: {Columbia City=43, Wabash=43, Markle=13, Huntington=23, Huntertown=36, Bluffton=0, Roanoke=24, Fort Wayne=25}
     Shortest path from Bluffton to Columbia City: [Bluffton, Markle, Roanoke, Columbia City]
-     */
+     */ 
     }
 
 
