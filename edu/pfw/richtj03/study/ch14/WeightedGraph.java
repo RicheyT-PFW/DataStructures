@@ -87,55 +87,74 @@ public class WeightedGraph<V extends Comparable<V>> {
     }
 
 
-// Dijkstra's algorithm to find the shortest distance from startV to all other vertices
 public Map<V, Integer> dijkstra(V startV, Map<V,V> previous) {
-    Map<V, Integer> distances = new HashMap<>(); //Distances to other vertices
-    for (V vertex : adjacencyList.keySet()) {
-        distances.put(vertex, Integer.MAX_VALUE); //Initialize all distances to maximum
-        previous.put(vertex, null); //Initialize all previous vertices to null
-    }
-    distances.put(startV, 0);
-
-    // Priority queue to select the vertex with the smallest distance
-    PriorityQueue<Map.Entry<V, Integer>> pq = new PriorityQueue<>(Map.Entry.comparingByValue());
-    pq.add(new AbstractMap.SimpleEntry<>(startV, 0)); // startV is 0 distance away
-
-    Set<V> visited = new HashSet<>(); // Set of visited vertices
-
-    while (!pq.isEmpty()) {
-        V current = pq.poll().getKey(); // Get the vertex with the smallest distance
-        //Skip visited vertices
-        if(visited.contains(current)) {
-            continue;
+        Map<V, Integer> distances = new HashMap<>(); //Distances to other vertices
+        for (V vertex : adjacencyList.keySet()) {
+            distances.put(vertex, Integer.MAX_VALUE); //Initialize all distances to maximum
+            previous.put(vertex, null); //Initialize all previous vertices to null
         }
-        //Indicate vertex was visited   
-        visited.add(current);     
+        distances.put(startV, 0);
 
-        //Loop through neighbors (Google HashMap .entrySet() and Map.Entry)
-        for(V neighbor : adjacencyList.get(current).keySet()) {
-            // Calculate new neighbor distance
-            distances.put(current, adjacencyList.get(current).get(neighbor));
-            
-            
-            // If the new distance is smaller, update distance and previous
-           if(true) { 
-            //TODO
-            
-                // Put the neighbor in the priority queue (Google AbstractMap.SimpleEntry)
-                 
+        // Priority queue to select the vertex with the smallest distance
+        PriorityQueue<Map.Entry<V, Integer>> pq = new PriorityQueue<>(Map.Entry.comparingByValue());
+        pq.add(new AbstractMap.SimpleEntry<>(startV, 0)); // startV is 0 distance away
+
+        Set<V> visited = new HashSet<>(); // Set of visited vertices
+
+        while (!pq.isEmpty()) {
+            V current = pq.poll().getKey(); // Get the vertex with the smallest distance
+            //Skip visited vertices
+            if(visited.contains(current)) {
+                continue;
+            }
+
+            //Indicate vertex was visited
+            visited.add(current);
+
+           // System.out.println(adjacencyList.get(current).entrySet());
+
+            //Loop through neighbors (Google HashMap .entrySet() and Map.Entry)
+            for (Map.Entry<V, Integer> neighbor: adjacencyList.get(current).entrySet()) {
+                // Calculate new neighbor distance
+                int newDistance = distances.get(current) + neighbor.getValue();
+
+                // If the new distance is smaller, update distance and previous
+;                if (newDistance < distances.get(neighbor.getKey())) {
+                    distances.put(neighbor.getKey(), newDistance);
+                    previous.put(neighbor.getKey(), current);
+
+                    // Put the neighbor in the priority queue (Google AbstractMap.SimpleEntry)
+                    if (pq.contains(neighbor)) pq.remove(neighbor);
+                    pq.add(Map.entry(neighbor.getKey(), newDistance));
+                }
             }
         }
+
+        return distances;
     }
-
-    return distances;
-}
-
 
 
     public static void main(String[] args) {
         main2();
 
     }
+
+ public LinkedList<V> getPath(V source, V destination, Map<V, V> previous) {
+        LinkedList<V> path = new LinkedList<>();
+        V finalDestinaion = destination;
+        int shortest = Integer.MAX_VALUE;
+
+        path.add(source);
+
+        while(!previous.get(destination).equals(source)) {
+            path.add(previous.get(destination));
+            destination = previous.get(destination);
+        }
+        path.add(finalDestinaion);
+
+        return path;
+    }
+
 
 
     public static void main2() {
@@ -159,7 +178,7 @@ public Map<V, Integer> dijkstra(V startV, Map<V,V> previous) {
 
     System.out.println(mapGraph);
 
-  /*  // Dijkstra's algorithm
+    // Dijkstra's algorithm
     Map<String, String> previous = new HashMap<>();
     Map<String, Integer> distances = mapGraph.dijkstra("Fort Wayne", previous);
     System.out.println("Shortest Distances from Fort Wayne: " + distances);

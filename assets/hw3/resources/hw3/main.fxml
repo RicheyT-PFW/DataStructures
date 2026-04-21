@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="657.0" prefWidth="900.0" styleClass="gamewindow" stylesheets="@../hw3/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hw3.Controller">
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="50.0" spacing="130.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="222.0" spacing="10.0">
+               <children>
+                  <Label text="Score:">
+                     <font>
+                        <Font name="Eras Demi ITC" size="24.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="scoreLbl" prefHeight="36.0" prefWidth="139.0" text="0">
+                     <font>
+                        <Font name="Eras Demi ITC" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+               <children>
+                  <Label text="Mistakes Left:">
+                     <font>
+                        <Font name="Eras Demi ITC" size="24.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="mistakeLbl" prefHeight="36.0" prefWidth="39.0" text="0">
+                     <font>
+                        <Font name="Eras Demi ITC" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="182.0" spacing="10.0">
+               <children>
+                  <Label text="Multiplier">
+                     <font>
+                        <Font name="Eras Demi ITC" size="24.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="multiplierLbl" prefHeight="36.0" prefWidth="62.0" text="1.0">
+                     <font>
+                        <Font name="Eras Demi ITC" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+      </HBox>
+   </bottom>
+   <top>
+      <VBox alignment="TOP_CENTER" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Dance Dance Keyboard" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Bauhaus 93" size="48.0" />
+               </font>
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
+            </Label>
+         </children>
+      </VBox>
+   </top>
+   <center>
+      <Pane fx:id="gamePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" styleClass="gamepane" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </BorderPane.margin>
+      </Pane>
+   </center>
+</BorderPane>
