@@ -1,4 +1,4 @@
-package M8_Graphs;
+package mod8;
 
 import java.io.File;
 import java.io.IOException;
