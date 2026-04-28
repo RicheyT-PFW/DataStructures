@@ -59,21 +59,32 @@ public class Graph_InDegree<V extends Comparable<V>> {
         ArrayList<V> sortedList = new ArrayList<>();
         Stack<V> zeroStack = new Stack<>(); // Holds vertices with in-degree 0
         // Initialize the stack with vertices of in-degree 0
-        
+        for (V v : adjacencyList.keySet()) {
+            if (adjacencyList.get(v).inDegree == 0) {
+                zeroStack.push(v);
+            }
+        }
         
         
         // Process vertices with in-degree 0
-        for(;;) {
+        int totalVertices = adjacencyList.size();
+        for (int i = 0; i < totalVertices; i++) {
+            if (zeroStack.isEmpty()) break;
         
             // Add to sorted list
+            V current = zeroStack.pop();
+            sortedList.add(current);
             
             // Decrease in-degree of neighbors
-            
+            for (V neighbor : getNeighbors(current)) {
+                Vertex v = adjacencyList.get(neighbor);
+                v.inDegree--;
                 
                 // If in-degree becomes 0, push to zeroStack        
-                if(true) {
-
+                if (v.inDegree == 0) {
+                    zeroStack.push(neighbor);
                 }
+            }
         }
 
         // Check for cycles
@@ -87,12 +98,27 @@ public class Graph_InDegree<V extends Comparable<V>> {
 
     public static void main(String[] args) throws IOException {
         // Prerequisites graph
-
+        Graph_InDegree<String> graph = new Graph_InDegree<>();
         // Read the file and add edges
+File file = new File(Graph_InDegree.class.getResource("/lab8/prerequisites.txt").getFile());
+        Scanner scanner = new Scanner(file);
+
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            if (line.contains("->")) {
+                String[] buffer = line.split("->");
+                String from = buffer[0].trim();
+                String to = buffer[1].trim();
+                graph.addEdge(from, to);
+            }
+        }
+        scanner.close();
 
         // Print the unsorted graph
+        System.out.println(graph.toString());
 
         // Topologically sort and print the graph
-
+        ArrayList<String> sorted = graph.kahnTopoSort();
+        System.out.println("Topological Sort: " + sorted);
     }
 }
