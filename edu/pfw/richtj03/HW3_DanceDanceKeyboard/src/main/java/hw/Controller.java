@@ -89,9 +89,9 @@ public class Controller {
         cardSpawnTimeline.play();
 
         //Play music
-        Media music = new Media(getClass().getResource("music.mp3").toExternalForm());
-        mediaPlayer = new MediaPlayer(music);
-        mediaPlayer.play();
+ //       Media music = new Media(getClass().getResource("music.mp3").toExternalForm());
+   //     mediaPlayer = new MediaPlayer(music);
+     //   mediaPlayer.play();
     }
 
     @FXML

@@ -49,7 +49,6 @@ public class Graph_InDegree<V extends Comparable<V>> {
     public String toString() {
         StringBuilder sb = new StringBuilder("Graph adjacency list:\n");
         for (V vertex : getVertices()) {
-            // TODO
             sb.append(vertex).append(" -> ").append(getNeighbors(vertex)).append("\n");
         }
         return sb.toString();
@@ -64,23 +63,23 @@ public class Graph_InDegree<V extends Comparable<V>> {
                 zeroStack.push(v);
             }
         }
-        
-        
+
         // Process vertices with in-degree 0
         int totalVertices = adjacencyList.size();
         for (int i = 0; i < totalVertices; i++) {
-            if (zeroStack.isEmpty()) break;
-        
+            if (zeroStack.isEmpty())
+                break;
+
             // Add to sorted list
             V current = zeroStack.pop();
             sortedList.add(current);
-            
+
             // Decrease in-degree of neighbors
             for (V neighbor : getNeighbors(current)) {
                 Vertex v = adjacencyList.get(neighbor);
                 v.inDegree--;
-                
-                // If in-degree becomes 0, push to zeroStack        
+
+                // If in-degree becomes 0, push to zeroStack
                 if (v.inDegree == 0) {
                     zeroStack.push(neighbor);
                 }
@@ -100,7 +99,7 @@ public class Graph_InDegree<V extends Comparable<V>> {
         // Prerequisites graph
         Graph_InDegree<String> graph = new Graph_InDegree<>();
         // Read the file and add edges
-File file = new File(Graph_InDegree.class.getResource("/lab8/prerequisites.txt").getFile());
+        File file = new File(Graph_InDegree.class.getResource("/lab8/prerequisites.txt").getFile());
         Scanner scanner = new Scanner(file);
 
         while (scanner.hasNextLine()) {
