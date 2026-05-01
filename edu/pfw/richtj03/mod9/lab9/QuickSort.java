@@ -20,6 +20,7 @@ public class QuickSort<T extends Comparable<T>> implements Sorter<T> {
     }
 
     private void quickSort(T[] arr, int low, int high) {
+	comparisons++;    
         if (low < high) {
             int pivotIndex = medianOfThreePartition(arr, low, high);
             quickSort(arr, low, pivotIndex - 1);
@@ -37,17 +38,21 @@ public class QuickSort<T extends Comparable<T>> implements Sorter<T> {
 
         // Use the median (arr[mid]) as the pivot
         swap(arr, mid, high);
+	swaps++;
 
         T pivot = arr[high];
         int i = low - 1;
 
         for (int j = low; j < high; j++) {
+	    comparisons++;
             if (arr[j].compareTo(pivot) <= 0) {
                 i++;
+		swaps++;
                 swap(arr, i, j);
             }
         }
         swap(arr, i + 1, high);
+	swaps++;
         return i + 1;
     }
 
@@ -73,6 +78,6 @@ public class QuickSort<T extends Comparable<T>> implements Sorter<T> {
 
     @Override
     public double getPerformance() {
-        return -1;
+        return (double) (comparisons + swaps) / arr.length;
     }
 }

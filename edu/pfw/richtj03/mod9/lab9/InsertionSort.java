@@ -22,6 +22,8 @@ public class InsertionSort<T extends Comparable<T>> implements Sorter<T>{
             int j = i - 1;
 
             while (j >= 0 && arr[j].compareTo(key) > 0) {
+		comparisons++;
+		swaps++;
                 arr[j + 1] = arr[j];
                 j--;
             }
@@ -37,6 +39,6 @@ public class InsertionSort<T extends Comparable<T>> implements Sorter<T>{
     public int getSwaps() { return swaps; }
     @Override
     public double getPerformance() {
-        return -1;
+        return (double) (swaps + comparisons) / arr.length;
     }
 }

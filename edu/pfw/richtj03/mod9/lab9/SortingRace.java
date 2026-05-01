@@ -36,10 +36,8 @@ public class SortingRace {
 			System.out.println(sorter);
 			System.out.println("Comparisons: " + sorter.getComparisons());
 			System.out.println("Swaps: " + sorter.getSwaps());
-			System.out.print(sorter.getClass().getSimpleName() + 
-							" Performance: "+ sorter.getPerformance());
+			System.out.print(sorter.getClass().getSimpleName() + " Performance: " + sorter.getPerformance());
 			System.out.println("\n\n---");
 		}
-		
     }
 }
