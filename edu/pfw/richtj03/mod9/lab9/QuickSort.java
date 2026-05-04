@@ -20,7 +20,6 @@ public class QuickSort<T extends Comparable<T>> implements Sorter<T> {
     }
 
     private void quickSort(T[] arr, int low, int high) {
-	comparisons++;    
         if (low < high) {
             int pivotIndex = medianOfThreePartition(arr, low, high);
             quickSort(arr, low, pivotIndex - 1);
@@ -32,27 +31,41 @@ public class QuickSort<T extends Comparable<T>> implements Sorter<T> {
         int mid = low + (high - low) / 2;
 
         // Find the median of arr[low], arr[mid], arr[high]
-        if (arr[low].compareTo(arr[mid]) > 0) swap(arr, low, mid);
-        if (arr[low].compareTo(arr[high]) > 0) swap(arr, low, high);
-        if (arr[mid].compareTo(arr[high]) > 0) swap(arr, mid, high);
+        comparisons++;
+        if (arr[low].compareTo(arr[mid]) > 0) {
+          swaps++;
+          swap(arr, low, mid);  
+        } 
+    
+        comparisons++;
+        if (arr[low].compareTo(arr[high]) > 0)  {
+           swap(arr, low, high);
+           swaps++;
+        } 
+
+        comparisons++;
+        if (arr[mid].compareTo(arr[high]) > 0) {
+          swap(arr, low, high);  
+          swaps++;
+        }
 
         // Use the median (arr[mid]) as the pivot
         swap(arr, mid, high);
-	swaps++;
+	    swaps++;
 
         T pivot = arr[high];
         int i = low - 1;
 
         for (int j = low; j < high; j++) {
-	    comparisons++;
+	         comparisons++;
             if (arr[j].compareTo(pivot) <= 0) {
                 i++;
-		swaps++;
+	        	swaps++;
                 swap(arr, i, j);
             }
         }
         swap(arr, i + 1, high);
-	swaps++;
+	    swaps++;
         return i + 1;
     }
 

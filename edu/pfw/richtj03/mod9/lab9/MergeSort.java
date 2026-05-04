@@ -18,7 +18,6 @@ public class MergeSort<T extends Comparable<T>> implements Sorter<T>{
 
     private void mergeSort(T[] arr, int left, int right) {
         if (left < right) {
-	    comparisons++;
             int mid = (left + right) / 2;
             mergeSort(arr, left, mid);
             mergeSort(arr, mid + 1, right);
@@ -33,9 +32,9 @@ public class MergeSort<T extends Comparable<T>> implements Sorter<T>{
         int i = 0, j = 0, k = left;
 
         while (i < leftArr.length && j < rightArr.length) {
+		    comparisons++;
             if (leftArr[i].compareTo(rightArr[j]) <= 0) {
                 arr[k++] = leftArr[i++];
-		comparisons++;
             } else {
                 arr[k++] = rightArr[j++];
             }
@@ -53,7 +52,9 @@ public class MergeSort<T extends Comparable<T>> implements Sorter<T>{
     public String toString() {
         return "Merge Sort - " + characteristic;
     }
-    public int getComparisons() { return comparisons; }
+    
+    public int getComparisons() { return comparisons;}
+
     @Override
     public double getPerformance() {
         return (double)  comparisons/arr.length;
