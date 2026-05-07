@@ -32,6 +32,7 @@ public class MergeSort<T extends Comparable<T>> implements Sorter<T>{
         int i = 0, j = 0, k = left;
 
         while (i < leftArr.length && j < rightArr.length) {
+		    comparisons++;
             if (leftArr[i].compareTo(rightArr[j]) <= 0) {
                 arr[k++] = leftArr[i++];
             } else {
@@ -51,9 +52,12 @@ public class MergeSort<T extends Comparable<T>> implements Sorter<T>{
     public String toString() {
         return "Merge Sort - " + characteristic;
     }
-    public int getComparisons() { return comparisons; }
+    
+    public int getComparisons() { return comparisons;}
+
     @Override
     public double getPerformance() {
-        return -1;
+        return (double)  comparisons/arr.length;
+
     }
 }

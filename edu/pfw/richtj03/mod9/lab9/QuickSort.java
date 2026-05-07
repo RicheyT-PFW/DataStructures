@@ -31,23 +31,41 @@ public class QuickSort<T extends Comparable<T>> implements Sorter<T> {
         int mid = low + (high - low) / 2;
 
         // Find the median of arr[low], arr[mid], arr[high]
-        if (arr[low].compareTo(arr[mid]) > 0) swap(arr, low, mid);
-        if (arr[low].compareTo(arr[high]) > 0) swap(arr, low, high);
-        if (arr[mid].compareTo(arr[high]) > 0) swap(arr, mid, high);
+        comparisons++;
+        if (arr[low].compareTo(arr[mid]) > 0) {
+          swaps++;
+          swap(arr, low, mid);  
+        } 
+    
+        comparisons++;
+        if (arr[low].compareTo(arr[high]) > 0)  {
+           swap(arr, low, high);
+           swaps++;
+        } 
+
+        comparisons++;
+        if (arr[mid].compareTo(arr[high]) > 0) {
+          swap(arr, low, high);  
+          swaps++;
+        }
 
         // Use the median (arr[mid]) as the pivot
         swap(arr, mid, high);
+	    swaps++;
 
         T pivot = arr[high];
         int i = low - 1;
 
         for (int j = low; j < high; j++) {
+	         comparisons++;
             if (arr[j].compareTo(pivot) <= 0) {
                 i++;
+	        	swaps++;
                 swap(arr, i, j);
             }
         }
         swap(arr, i + 1, high);
+	    swaps++;
         return i + 1;
     }
 
@@ -73,6 +91,6 @@ public class QuickSort<T extends Comparable<T>> implements Sorter<T> {
 
     @Override
     public double getPerformance() {
-        return -1;
+        return (double) (comparisons + swaps) / arr.length;
     }
 }

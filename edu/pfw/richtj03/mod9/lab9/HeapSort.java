@@ -25,7 +25,7 @@ public class HeapSort<T extends Comparable<T>> implements Sorter<T>{
 
         for (int i = n - 1; i >= 0; i--) {
             swap(arr, 0, i);
-            swaps++;
+	    swaps++;
             heapify(arr, i, 0);
         }
     }
@@ -35,19 +35,27 @@ public class HeapSort<T extends Comparable<T>> implements Sorter<T>{
         int left = 2 * root + 1;
         int right = 2 * root + 2;
 
-        if (left < heapSize && arr[left].compareTo(arr[largest]) > 0) {
-            largest = left;
+        if (left < heapSize) {
+	   comparisons++;
+	    if(arr[left].compareTo(arr[largest]) > 0) {
+            	largest = left;
+	    }
         }
-
-        if (right < heapSize && arr[right].compareTo(arr[largest]) > 0) {
-            largest = right;
+	
+        if (right < heapSize) {
+	   comparisons++;
+	    if(arr[right].compareTo(arr[largest]) > 0) {
+		largest = right;	
+	    }
         }
-
-        if (largest != root) {
+	
+	if (largest != root) {
             swap(arr, root, largest);
             heapify(arr, heapSize, largest);
         }
     }
+
+
 
     private void swap(T[] arr, int i, int j) {
         if (i == j) return;
@@ -56,14 +64,16 @@ public class HeapSort<T extends Comparable<T>> implements Sorter<T>{
         arr[j] = temp;
     }
 
+
     @Override
     public String toString() {
         return "Heap Sort - " + characteristic;
     }
     public int getComparisons() { return comparisons; }
     public int getSwaps() { return swaps; }
+   
     @Override
     public double getPerformance() {
-        return -1;
+        return (double) (comparisons + swaps) / arr.length ;
     }
 }
